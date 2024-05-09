@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Category;
 use Illuminate\Support\Str;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoryFormRequest;
+use Illuminate\Support\Facades\File;
 
 class CategoryController extends Controller
 {
@@ -42,6 +42,41 @@ class CategoryController extends Controller
         $category->save();
 
         return redirect('admin/categories')->with('message','Category Added Successfully');
+
+    }
+
+    function edit(Category $category) {
+        return view('admin.category.edit', compact('category'));
+    }
+
+    function update(CategoryFormRequest $request, $id)
+    {
+        $validatedData = $request->validated();
+
+        $category = Category::findOrFail($id);
+        $category->name = $validatedData['name'];
+        $category->slug = Str::slug($validatedData['slug']);
+        $category->description = $validatedData['description'];
+
+        if($request->hasFile('image')) {
+            $sPath = 'uploads/category/'.$category->image;
+            if (File::exists($sPath)) {
+                File::delete($sPath);
+            }
+            $file = $request->file('image');
+            $ext = $file->getClientOriginalExtension();
+            $file_name = time().'.'.$ext;
+            $file->move('uploads/category/', $file_name);
+            $category->image =  $file_name;
+        }
+
+        $category->meta_title =  $validatedData['meta_title'];
+        $category->meta_keyword =  $validatedData['meta_keyword'];
+        $category->meta_description =  $validatedData['meta_description'];
+        $category->status = $request->has('status') ? '1' : '0';
+        $category->save();
+
+        return redirect('admin/categories')->with('message','Category Updated Successfully');
 
     }
 }
