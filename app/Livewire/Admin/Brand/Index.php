@@ -13,7 +13,7 @@ class Index extends Component
 
     protected $paginationTheme = 'bootstrap';
 
-    public $name, $slug, $status;
+    public $name, $slug, $status, $brand_id;
 
     public function rules()
     {
@@ -34,7 +34,6 @@ class Index extends Component
     public function storeBrand()
     {
         $this->validate();
-        // dd($inputs);
         Brand::create([
             'name' => $this->name,
             'slug' => Str::slug($this->slug),
@@ -42,12 +41,52 @@ class Index extends Component
         ]);
 
         session()->flash('message', 'Brand Added');
-        $this->dispatch('close-modal');
         $this->resetInput();
     }
 
+    public function editBrand($brand_id)
+    {
+        $this->brand_id = $brand_id;
+        $brand = Brand::findOrFail($brand_id);
+        $this->name = $brand->name;
+        $this->slug = $brand->slug;
+        $this->status = $brand->status == 1 ? true : false;
+    }
+
+    public function updateBrand()
+    {
+        $this->validate();
+        Brand::findOrFail($this->brand_id)->update([
+            'name' => $this->name,
+            'slug' => Str::slug($this->slug),
+            'status' => $this->status == true ? 1 : 0,
+        ]);
+
+        session()->flash('message', 'Brand Updated');
+        $this->resetInput();
+    }
+
+    public function deleteBrand($brand_id)
+    {
+        $this->brand_id = $brand_id;
+    }
+    
+    public function destroyBrand()
+    {
+        $brand = Brand::findOrFail($this->brand_id);
+       
+        $brand->delete();
+        session()->flash('message','Brand Deleted!');
+        $this->resetInput();
+    }
+
+    public function closeModal()
+    {
+        $this->resetInput();
+    }
     public function resetInput()
     {
-        $this->name = $this->slug = $this->status = null;
+        $this->name = $this->slug = $this->status = $this->brand_id = null;
+        $this->dispatch('close-modal');
     }
 }

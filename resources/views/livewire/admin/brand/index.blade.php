@@ -22,6 +22,9 @@
                             <th>
                                 Slug
                             </th>
+                            <th>
+                                Status
+                            </th>
 
                             <th>
                                 Action
@@ -40,11 +43,20 @@
                                 <td>
                                     {{ $brand->slug }}
                                 </td>
+                                <td>
+                                    @if ( $brand->status == 1)
+                                    <span class="badge rounded-pill bg-primary">Hidden</span>
+                                    @else
+                                    <span class="badge rounded-pill bg-warning text-dark">Visible</span>
+                                        
+                                    @endif
+
+                                </td>
 
                                 <td>
-                                    <a href="{{ url('/admin/brand/' . $brand->id . '/edit') }}"><i
-                                            class="fa fa-edit"></i></a>
-                                    <a wire:click="deleteBrand({{ $brand->id }})" href=""
+                                    <a wire:click="editBrand({{ $brand->id }})" href="" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#updateBrandModal"><i
+                                        class="fa fa-edit"></i></a>
+                                    <a wire:click="deleteBrand({{ $brand->id }})" class="btn btn-danger" href=""
                                         data-bs-toggle="modal" data-bs-target="#confirmDelete"><i
                                             class="fa fa-trash-o"></i></a>
                                 </td>
@@ -68,6 +80,8 @@
     <script>
         window.addEventListener('close-modal', (event) => {
             $("#addBrandModal").modal('hide');
+            $("#updateBrandModal").modal('hide');
+            $("#confirmDelete").modal('hide');
         })
     </script>
 @endpush
