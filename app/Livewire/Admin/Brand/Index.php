@@ -40,7 +40,7 @@ class Index extends Component
             'status' => $this->status == true ? 1 : 0,
         ]);
 
-        session()->flash('message', 'Brand Added');
+        $this->dispatch('alertyfy', text: 'Brand Added Successfully');
         $this->resetInput();
     }
 
@@ -62,7 +62,7 @@ class Index extends Component
             'status' => $this->status == true ? 1 : 0,
         ]);
 
-        session()->flash('message', 'Brand Updated');
+        $this->dispatch('alertyfy', text: 'Brand Updated Successfully');
         $this->resetInput();
     }
 
@@ -76,7 +76,8 @@ class Index extends Component
         $brand = Brand::findOrFail($this->brand_id);
        
         $brand->delete();
-        session()->flash('message','Brand Deleted!');
+
+        $this->dispatch('alertyfy', text: 'Brand Deleted Successfully');
         $this->resetInput();
     }
 

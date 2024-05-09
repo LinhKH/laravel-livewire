@@ -5,12 +5,15 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Majestic Admin Pro</title>
+    <title>Ecommerce Shop</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('admin/assets/vendors/font-awesome/css/font-awesome.min.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/assets/vendors/mdi/css/materialdesignicons.min.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/assets/vendors/css/vendor.bundle.base.css') }}">
+
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
     <!-- endinject -->
     <!-- plugin css for this page -->
     <link rel="stylesheet" href="{{ asset('admin/assets/vendors/datatables.net-bs4/dataTables.bootstrap4.css') }}">
@@ -74,6 +77,20 @@
     <!-- End custom js for this page-->
     <script src="{{ asset('admin/assets/js/jquery.cookie.js') }}" type="text/javascript"></script>
 
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+    @if (session('message'))
+        <script>
+            alertify.set('notifier','position', 'top-right');
+            alertify.success('{{ session("message") }}');
+        </script>
+    @endif
+    <script>
+        window.addEventListener('alertyfy', event => {
+            alertify.set('notifier','position', 'top-right');
+            alertify.success(event.detail.text + '!');
+        });
+    </script>
+    
     @livewireScripts
     @stack('script')
 </body>

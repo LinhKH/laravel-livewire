@@ -4,11 +4,6 @@
         <div class="card-body">
             <h4 class="card-title float-end"><a href="" class="btn btn-primary" data-bs-toggle="modal"
                     data-bs-target="#addBrandModal">Add Brand</a></h4><br />
-            @if (session('message'))
-                <div class="alert alert-success" role="alert">
-                    {{ session('message') }}
-                </div>
-            @endif
             <div class="table-responsive pt-3">
                 <table class="table table-bordered">
                     <thead>

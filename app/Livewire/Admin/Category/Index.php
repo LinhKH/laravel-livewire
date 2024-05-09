@@ -27,7 +27,8 @@ class Index extends Component
             File::delete($sPath);
         }
         $category->delete();
-        session()->flash('message','Category Deleted!');
+      
+        $this->dispatch('alertyfy', text: 'Category Deleted Successfully');
         $this->dispatch('close-modal');
     }
     public function render()

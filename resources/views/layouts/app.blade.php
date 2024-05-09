@@ -17,7 +17,7 @@
 
 
     <!-- Scripts -->
-    @vite(['resources/sass/app.scss', 'resources/js/app.js', 'public/assets/js/bootstrap.bundle.min.js', 'public/assets/js/jquery-3.7.1.min.js'])
+    @vite(['resources/sass/app.scss', 'resources/js/app.js', 'public/assets/js/jquery-3.7.1.min.js'])
 
     @livewireStyles
 </head>
