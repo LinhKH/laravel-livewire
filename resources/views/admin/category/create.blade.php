@@ -8,7 +8,7 @@
                     <h4 class="card-title"> <a href="{{ url('admin/categories') }}" type="button"
                             class="btn btn-primary me-2 float-end">Back</a></h4><br />
 
-                    <form class="forms-sample" method="POST" action="{{ url('/admin/category/create') }}"
+                    <form class="forms-sample" method="POST" action="{{ route('categories.store') }}"
                         enctype="multipart/form-data">
                         @csrf
                         <div class="row">

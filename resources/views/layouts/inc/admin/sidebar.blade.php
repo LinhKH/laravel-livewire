@@ -16,9 +16,9 @@
             <div class="collapse" id="ui-basic">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item"> <a class="nav-link"
-                            href="{{ url('admin/categories') }}">Categories List</a></li>
+                            href="{{ url('/admin/categories') }}">Categories List</a></li>
                     <li class="nav-item"> <a class="nav-link"
-                            href="{{ url('/admin/category/create') }}">Add Category</a></li>
+                            href="{{ url('/admin/categories/create') }}">Add Category</a></li>
                 </ul>
             </div>
         </li>
@@ -32,6 +32,22 @@
             <div class="collapse" id="form-elements">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item"><a class="nav-link" href="{{ url('/admin/brands') }}">Bands List</a></li>
+                </ul>
+            </div>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#ui-product" aria-expanded="false"
+                aria-controls="ui-product">
+                <i class="mdi mdi-circle-outline menu-icon"></i>
+                <span class="menu-title">Products</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="ui-product">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link"
+                            href="{{ route('products.index') }}">Products List</a></li>
+                    <li class="nav-item"> <a class="nav-link"
+                            href="{{ route('products.create') }}">Add Product</a></li>
                 </ul>
             </div>
         </li>

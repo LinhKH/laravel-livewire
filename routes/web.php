@@ -2,17 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-
 Route::get('/', function () {
     return view('welcome');
 });
@@ -26,11 +15,19 @@ Route::prefix('admin')->middleware(['auth', 'is_admin'])->group(function() {
 
     // Categories
     Route::controller(App\Http\Controllers\Admin\CategoryController::class)->group(function() {
-        Route::get('/categories','index');
-        Route::get('/category/create','create');
-        Route::post('/category/create','store');
-        Route::get('/category/{category}/edit','edit');
-        Route::put('/category/{category}/edit','update');
+        Route::get('/categories','index')->name('categories.index');
+        Route::get('/categories/create','create')->name('categories.create');
+        Route::post('/categories/create','store')->name('categories.store');
+        Route::get('/categories/{category}/edit','edit')->name('categories.edit');
+        Route::put('/categories/{category}/edit','update')->name('categories.update');
+    });
+    // Products
+    Route::controller(App\Http\Controllers\Admin\ProductController::class)->group(function() {
+        Route::get('/products','index')->name('products.index');
+        Route::get('/products/create','create')->name('products.create');
+        Route::post('/products/create','store')->name('products.store');
+        // Route::get('/products/{product}/edit','edit');
+        // Route::put('/products/{product}/edit','update');
     });
 
     Route::get('/brands' , App\Livewire\Admin\Brand\Index::class);

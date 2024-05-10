@@ -2,7 +2,7 @@
     <div class="card">
 
         <div class="card-body">
-            <h4 class="card-title"> <a href="{{ url('admin/category/create') }}" type="button"
+            <h4 class="card-title"> <a href="{{ url('admin/categories/create') }}" type="button"
                     class="btn btn-primary me-2 float-end">Add Category</a></h4><br />
                     
             <div class="table-responsive pt-3">
@@ -42,7 +42,7 @@
                                     <img src="{{ asset('uploads/category') . '/' . $category->image }}" />
                                 </td>
                                 <td>
-                                    <a href="{{ url('/admin/category/' . $category->id . '/edit') }}"><i
+                                    <a href="{{ url('/admin/categories/' . $category->id . '/edit') }}"><i
                                             class="fa fa-edit"></i></a>
                                     <a wire:click="deleteCategory({{ $category->id }})" href="" data-bs-toggle="modal" data-bs-target="#confirmDelete"><i
                                             class="fa fa-trash-o"></i></a>
@@ -52,7 +52,10 @@
 
                     </tbody>
                 </table>
-                {{ $categories->links() }}
+                <div class="mt-3">
+                    {{ $categories->links() }}
+
+                </div>
             </div>
         </div>
     </div>

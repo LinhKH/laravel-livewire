@@ -41,7 +41,7 @@ class CategoryController extends Controller
         $category->status = $request->has('status') ? 1 : 0;
         $category->save();
 
-        return redirect('admin/categories')->with('message','Category Added Successfully');
+        return redirect()->route('categories.index')->with('message','Category Added Successfully');
 
     }
 
@@ -76,7 +76,7 @@ class CategoryController extends Controller
         $category->status = $request->has('status') ? '1' : '0';
         $category->save();
 
-        return redirect('admin/categories')->with('message','Category Updated Successfully');
+        return redirect()->route('categories.index')->with('message','Category Updated Successfully');
 
     }
 }
