@@ -2,6 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Brand;
+use App\Models\Category;
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ProductFormRequest extends FormRequest
@@ -23,10 +26,10 @@ class ProductFormRequest extends FormRequest
     {
 
         return [
-            'category_id' => ['required'],
+            'category_id' => ['required', Rule::exists(Category::class, 'id')],
+            'brand_id' => ['required', Rule::exists(Brand::class, 'id')],
             'name' => ['required','string'],
             'slug' => ['required','string'],
-            'brand_id' => ['required','integer'],
             'small_description' => ['nullable','string'],
             'description' => ['nullable','string'],
             'original_price' => ['required','integer'],
