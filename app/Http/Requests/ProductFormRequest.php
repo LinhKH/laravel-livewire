@@ -38,6 +38,7 @@ class ProductFormRequest extends FormRequest
             'trending' => ['nullable'],
             'status' => ['nullable'],
             'image.*' => ['nullable'],
+            'colors.*' => ['nullable'],
 
             'meta_title' => ['required','string'],
             'meta_keyword' => ['required','string'],

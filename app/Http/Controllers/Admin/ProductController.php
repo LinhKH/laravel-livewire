@@ -9,6 +9,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductFormRequest;
+use App\Models\Color;
 use App\Models\ProductImage;
 use Illuminate\Support\Facades\File;
 
@@ -23,7 +24,8 @@ class ProductController extends Controller
     {
         $categories = Category::all();
         $brands = Brand::all();
-        return view('admin.product.create', compact('categories', 'brands'));
+        $colors = Color::all();
+        return view('admin.product.create', compact('categories', 'brands', 'colors'));
     }
 
     function store(ProductFormRequest $request)
@@ -65,13 +67,25 @@ class ProductController extends Controller
             }
         }
 
+        if($request->colors)
+        {
+            foreach($request->colors as $key => $color)
+            {
+                $product->colors()->create([
+                    'color_id' => $color,
+                    'quantity' => $request->quantities[$key] ?? 0
+                ]);
+            }
+        }
+
         return redirect()->route('products.index')->with('message','Product Added Successfully');
     }
 
     function edit(Product $product) {
         $categories = Category::all();
         $brands = Brand::all();
-        return view('admin.product.edit', compact('product', 'categories', 'brands'));
+        $colors = Color::all();
+        return view('admin.product.edit', compact('product', 'categories', 'brands', 'colors'));
     }
 
     function update(ProductFormRequest $request, Product $product)
@@ -109,6 +123,17 @@ class ProductController extends Controller
                 $product->images()->create([
                     // 'product_id' => $product->id, // not need declare because relationship
                     'image' => $sPath . $file_name,
+                ]);
+            }
+        }
+
+        if($request->colors)
+        {
+            foreach($request->colors as $key => $color)
+            {
+                $product->colors()->create([
+                    'color_id' => $color,
+                    'quantity' => $request->quantities[$key] ?? 0
                 ]);
             }
         }

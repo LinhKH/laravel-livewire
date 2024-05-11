@@ -27,4 +27,9 @@ class Product extends Model
     {
         return $this->hasMany(ProductImage::class);
     }
+
+    public function colors()
+    {
+        return $this->hasMany(ProductColor::class);
+    }
 }

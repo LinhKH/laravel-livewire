@@ -42,6 +42,10 @@
                                 data-bs-target="#product-image" type="button" role="tab" aria-controls="product-image"
                                 aria-selected="false">Images</button>
                         </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="gallery-tab" data-bs-toggle="tab" data-bs-target="#gallery"
+                                type="button" role="tab" aria-controls="gallery" aria-selected="false">Color</button>
+                        </li>
                     </ul>
                     <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade border p-3 show active" id="home" role="tabpanel"
@@ -171,6 +175,26 @@
                                 <h5>No Image</h5>
                                 @endif
                                 
+                            </div>
+                        </div>
+                        <div class="tab-pane fade border p-3" id="gallery" role="tabpanel"
+                            aria-labelledby="gallery-tab">
+                            <div class="row">
+                                <label >Select Colors</label>
+                                @forelse ($colors as $color)
+                                <div class="col-md border">
+                                    <div class="form-check form-check-flat form-check-primary">
+                                        <label class="form-check-label"><input type="checkbox" name="colors[]" value="{{ $color->id }}" class="form-check-input">{{ $color->name }} <i class="input-helper"></i></label>
+                                    </div>
+                                    <div>
+                                        Quantity : <input type="number" min="0" name="quantities[]" class="form-control">
+                                    </div>
+
+                                </div>
+                                    
+                                @empty
+                                    <div class="col-md-12"><h2>No Data</h2></div>
+                                @endforelse
                             </div>
                         </div>
                     </div>
