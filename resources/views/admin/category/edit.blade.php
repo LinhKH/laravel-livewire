@@ -59,7 +59,7 @@
                                     <label for="formFile" class="form-label">Image</label>
                                     <input class="form-control mb-3 @error('image') is-invalid @enderror" name="image"
                                         type="file" id="formFile">
-                                    <img src="{{ asset('uploads/category') . '/' . $category->image }}" width="60"
+                                    <img src="{{ asset($category->image) }}" width="60"
                                         height="60" />
                                     @error('image')
                                         <span class="invalid-feedback" role="alert">

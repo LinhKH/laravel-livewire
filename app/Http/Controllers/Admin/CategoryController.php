@@ -28,11 +28,12 @@ class CategoryController extends Controller
         $category->description = $validatedData['description'];
 
         if($request->hasFile('image')) {
+            $sPath = 'uploads/category/';
             $file = $request->file('image');
             $ext = $file->getClientOriginalExtension();
             $file_name = time().'.'.$ext;
-            $file->move('uploads/category/', $file_name);
-            $category->image =  $file_name;
+            $file->move($sPath, $file_name);
+            $category->image = '/'.$sPath. $file_name;
         }
 
         $category->meta_title =  $validatedData['meta_title'];
@@ -59,15 +60,15 @@ class CategoryController extends Controller
         $category->description = $validatedData['description'];
 
         if($request->hasFile('image')) {
-            $sPath = 'uploads/category/'.$category->image;
-            if (File::exists($sPath)) {
-                File::delete($sPath);
+            $sPath = 'uploads/category/';
+            if (File::exists($sPath.$category->image)) {
+                File::delete($sPath.$category->image);
             }
             $file = $request->file('image');
             $ext = $file->getClientOriginalExtension();
             $file_name = time().'.'.$ext;
-            $file->move('uploads/category/', $file_name);
-            $category->image =  $file_name;
+            $file->move($sPath, $file_name);
+            $category->image = '/'.$sPath . $file_name;
         }
 
         $category->meta_title =  $validatedData['meta_title'];

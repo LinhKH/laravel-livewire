@@ -39,7 +39,7 @@
                                     {{ $category->status == '1' ? 'Hidden' : 'Visible' }}
                                 </td>
                                 <td>
-                                    <img src="{{ asset('uploads/category') . '/' . $category->image }}" />
+                                    <img src="{{ asset($category->image) }}" />
                                 </td>
                                 <td>
                                     <a href="{{ url('/admin/categories/' . $category->id . '/edit') }}"><i
