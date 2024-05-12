@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductFormRequest;
 use App\Models\Color;
+use App\Models\ProductColor;
 use App\Models\ProductImage;
 use Illuminate\Support\Facades\File;
 
@@ -84,8 +85,10 @@ class ProductController extends Controller
     function edit(Product $product) {
         $categories = Category::all();
         $brands = Brand::all();
-        $colors = Color::all();
-        return view('admin.product.edit', compact('product', 'categories', 'brands', 'colors'));
+        $colorsIds = $product->colors->pluck('color_id')->toArray();
+        $colorsNotIn = Color::whereNotIn('id',$colorsIds)->get();
+
+        return view('admin.product.edit', compact('product', 'categories', 'brands', 'colorsNotIn', 'colorsIds'));
     }
 
     function update(ProductFormRequest $request, Product $product)
@@ -165,5 +168,31 @@ class ProductController extends Controller
         $product->delete();
         
         return redirect()->route('products.index')->with('message','Product Deleted With All Its Image Successfully');
+    }
+
+    function updateQty(Request $request, int $product_color_id) {
+
+        $productColor = Product::findOrFail($request->product_id)
+        
+                ->colors()->where('id',$product_color_id)->first();
+
+
+        $productColor->update([
+            'quantity' => $request->product_color_qty
+        ]);
+        return response()->json([
+            'message' => 'Product color quantity updated successfully'
+        ]);
+    }
+
+    function destroyProductColor(int $product_color_id)
+    {
+        $productColor = ProductColor::findOrFail($product_color_id);
+        
+        $productColor->delete();
+
+        return response()->json([
+            'message' => 'Product color deleted successfully'
+        ]);
     }
 }

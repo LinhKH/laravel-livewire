@@ -181,13 +181,13 @@
                             aria-labelledby="gallery-tab">
                             <div class="row">
                                 <label >Select Colors</label>
-                                @forelse ($colors as $color)
+                                @forelse ($colorsNotIn as $key => $color)
                                 <div class="col-md border">
                                     <div class="form-check form-check-flat form-check-primary">
                                         <label class="form-check-label"><input type="checkbox" name="colors[]" value="{{ $color->id }}" class="form-check-input">{{ $color->name }} <i class="input-helper"></i></label>
                                     </div>
                                     <div>
-                                        Quantity : <input type="number" min="0" name="quantities[]" class="form-control">
+                                        Quantity : <input type="number" min="0" name="quantities[]"  class="form-control">
                                     </div>
 
                                 </div>
@@ -195,7 +195,37 @@
                                 @empty
                                     <div class="col-md-12"><h2>No Data</h2></div>
                                 @endforelse
+
+                                <div class="table-responsive pt-3">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Color</th>
+                                                <th scope="col">Quantity</th>
+                                                <th scope="col">Delete</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($product->colors as $key => $pcolor)
+                                            <tr class="product-color">
+                                                <td>{{ $pcolor->color?->name }}</td>
+                                                <td>
+                                                    <div class="input-group mb-3">
+                                                        <input type="number" min="0" value="{{ $pcolor->quantity }}"  class="form-control productColorQty">
+                                                        <button type="button" class="btn btn-primary updateProductColor" value="{{ $pcolor->id }}">Update</button>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <button type="button" class="btn btn-danger deleteProductColor" value="{{ $pcolor->id }}">Delete</button>
+                                                </td>
+                                            </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+
+                                </div>
                             </div>
+
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary mt-3">Submit</button>
@@ -205,3 +235,67 @@
     </div>
 </div>
 @endsection
+@push('script')
+    <script>
+        $(document).ready(function() {
+            $(document).on('click', '.updateProductColor', function(e) {
+                e.preventDefault();
+
+                var product_color_id = $(this).val();
+                
+                var product_id = "{{ $product->id }}";
+
+                var product_color_qty = $(this).closest('.product-color').find('.productColorQty').val();
+
+                if (product_color_qty <=0)
+                {
+                    alert('Quantity must be greater than 0');
+                    return false;
+                }
+
+                var data = {
+                    'product_id' : product_id,
+                    'product_color_qty' : product_color_qty
+                };
+
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    url: "/admin/products/product-color/"+product_color_id+"/update",
+                    type: 'POST',
+                    data: data,
+                    success: function(data) {
+                        alertify.set('notifier','position', 'top-right');
+                        alertify.success(data.message + '!');
+                    }
+                });
+            });
+            $(document).on('click', '.deleteProductColor', function(e) {
+                e.preventDefault();
+                
+                var product_color_id = $(this).val();
+                var thisClick =  $(this)
+
+                if(confirm("Are you sure you want to delete this?")){
+                    $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    url: "/admin/products/product-color/"+product_color_id+"/delete",
+                    type: 'GET',
+                    success: function(data) {
+                        thisClick.closest('.product-color').remove();
+                        alertify.set('notifier','position', 'top-right');
+                        alertify.success(data.message + '!');
+                    }
+                });
+                }
+                else{
+                    return false;
+                }
+
+            });
+        });
+    </script>
+@endpush

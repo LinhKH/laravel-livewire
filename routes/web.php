@@ -30,6 +30,9 @@ Route::prefix('admin')->middleware(['auth', 'is_admin'])->group(function() {
         Route::put('/products/{product}/edit','update')->name('products.update');
         Route::get('/products/{product}/delete','destroy')->name('products.destroy');
         Route::get('/products/{image_id}/image/delete','destroyImage')->name('products.image.delete');
+
+        Route::post('/products/product-color/{product_color_id}/update','updateQty')->name('products.product-color.update');
+        Route::get('/products/product-color/{product_color_id}/delete','destroyProductColor')->name('products.product-color.delete');
     });
     // Colors
     Route::controller(App\Http\Controllers\Admin\ColorController::class)->group(function() {
