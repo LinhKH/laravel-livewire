@@ -42,7 +42,7 @@
                                 <span class="sr-only">Loading...</span>
                             </div>
 
-                            <div wire:loading.remove>
+                            <div wire:loading.remove wire:target='colorSelected'>
                                 @if ($this->productColorSelectedQty =='outOfStock')
                                 <label class="label-stock bg-danger mt-3">Out Of Stock</label>
                                 @elseif ($this->productColorSelectedQty > 0)
@@ -67,7 +67,7 @@
                     <div class="mt-2">
                         <a href="" class="btn btn1"> <i class="fa fa-shopping-cart"></i> Add To Cart</a>
                         <a href="javascript:void(0)" wire:click='addToWishlist({{ $product->id }})' class="btn btn1"> 
-                            <span wire:loading.remove>
+                            <span wire:loading.remove wire:target='addToWishlist'>
                                 <i class="fa fa-heart"></i> Add To Wishlist 
                             </span>
                             

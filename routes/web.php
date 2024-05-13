@@ -6,7 +6,7 @@ Route::get('/', [App\Http\Controllers\Frontend\FrontendController::class, 'index
 Route::get('/collections', [App\Http\Controllers\Frontend\FrontendController::class, 'categories']);
 Route::get('/collections/{category_slug}', [App\Http\Controllers\Frontend\FrontendController::class, 'prooducts']);
 Route::get('/collections/{category_slug}/{product_slug}', [App\Http\Controllers\Frontend\FrontendController::class, 'prooductDetail']);
-Route::get('/wishlists', [App\Http\Controllers\Frontend\WishlistController::class, 'index']);
+Route::get('/wishlists', [App\Http\Controllers\Frontend\WishlistController::class, 'index'])->middleware('auth');
 
 Auth::routes();
 
