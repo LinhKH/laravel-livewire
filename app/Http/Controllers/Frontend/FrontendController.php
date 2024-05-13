@@ -22,12 +22,11 @@ class FrontendController extends Controller
     {
 
         $category = Category::where('slug', $category_slug)->first();
-        if($category) {
-           $products = $category->products()->with('images')->get();
-
+        if ($category) {
+            $products = $category->products()->with('images')->get();
         } else {
             return redirect()->back();
         }
-        return view('frontend.product.index', compact('products','category'));
+        return view('frontend.product.index', compact('products', 'category'));
     }
 }
