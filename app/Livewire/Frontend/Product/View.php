@@ -2,7 +2,7 @@
 
 namespace App\Livewire\Frontend\Product;
 
-use App\Models\Wishlist;
+use App\Models\WishList;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
@@ -31,7 +31,7 @@ class View extends Component
     {
         if(Auth::check())
         {
-            $wishlist = Wishlist::where(['user_id' => Auth::id(), 'product_id' => $product_id])->first();
+            $wishlist = WishList::where(['user_id' => Auth::id(), 'product_id' => $product_id])->first();
 
             if($wishlist)
             {
@@ -43,9 +43,13 @@ class View extends Component
             }
             else
             {
-                Wishlist::create([
+                WishList::create([
                     'user_id' => Auth::id(),
                     'product_id' => $product_id,
+                ]);
+                $this->dispatch('alertyfy', [
+                    'text'=> 'Added Wishlist Successfully',
+                    'type' => 'success',
                 ]);
             }
         } else {
