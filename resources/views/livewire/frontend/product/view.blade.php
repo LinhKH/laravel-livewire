@@ -1,6 +1,11 @@
 <div class="py-3 py-md-5 bg-light">
     <div class="container">
         <div class="row">
+            @if (session('message'))
+                <div class="alert alert-success">
+                    {{ session('message') }}
+                </div>
+            @endif
             <div class="col-md-5 mt-3">
                 <div class="bg-white border">
                     @if ($product->images->count() > 0)
@@ -29,19 +34,17 @@
                                 <button wire:click='colorSelected({{ $color->id }})' class="form-check-label text-white" style="background-color: {{ $color->color->code }}">
                                 {{ $color->color->name }}
                                 </button>
-                                
                             @endforeach
                             
                             <br/>
-                            <div wire:loading class="mt-3"">  
-                                <div class="spinner-border text-primary" role="status">
-                                    <span class="sr-only">Loading...</span>
-                                  </div>
+
+                            <div wire:loading wire:target='colorSelected' class="spinner-border text-primary mt-3" role="status">
+                                <span class="sr-only">Loading...</span>
                             </div>
+
                             <div wire:loading.remove>
                                 @if ($this->productColorSelectedQty =='outOfStock')
                                 <label class="label-stock bg-danger mt-3">Out Of Stock</label>
-                                
                                 @elseif ($this->productColorSelectedQty > 0)
                                 <label class="label-stock bg-success mt-3">In Stock</label>
                                 @endif
@@ -63,7 +66,13 @@
                     </div>
                     <div class="mt-2">
                         <a href="" class="btn btn1"> <i class="fa fa-shopping-cart"></i> Add To Cart</a>
-                        <a href="" class="btn btn1"> <i class="fa fa-heart"></i> Add To Wishlist </a>
+                        <a href="javascript:void(0)" wire:click='addToWishlist({{ $product->id }})' class="btn btn1"> 
+                            <span wire:loading.remove>
+                                <i class="fa fa-heart"></i> Add To Wishlist 
+                            </span>
+                            
+                            <span wire:loading wire:target='addToWishlist'>Loading...</span>
+                        </a>
                     </div>
                     <div class="mt-3">
                         <h5 class="mb-0">Small Description</h5>

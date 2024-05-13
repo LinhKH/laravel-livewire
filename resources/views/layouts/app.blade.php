@@ -20,6 +20,9 @@
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+
     <link href="{{ asset('assets/css/custome.css') }}" rel="stylesheet">
 
     <!-- Scripts -->
@@ -92,7 +95,20 @@
 
     <!-- plugins:js -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
+    @if (session('message'))
+        <script>
+            alertify.set('notifier','position', 'top-right');
+            alertify.success('{{ session("message") }}');
+        </script>
+    @endif
+    <script>
+        window.addEventListener('alertyfy', event => {
+            alertify.set('notifier','position', 'top-right');
+            alertify.success(event.detail.text + '!');
+        });
+    </script>
     @livewireScripts
 </body>
 </html>
