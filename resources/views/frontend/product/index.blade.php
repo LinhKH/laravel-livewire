@@ -18,7 +18,7 @@
                 <h4 class="mb-4">Our Products</h4>
             </div>
 
-            <livewire:frontend.product.index :products="$products" :category="$category" />
+            <livewire:frontend.product.index :products="$products" :category="$category" :wire:key="'item-'.$category->id" />
 
         </div>
     </div>

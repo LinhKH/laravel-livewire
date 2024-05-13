@@ -17,6 +17,23 @@
 
             </div>
         </div>
+        <div class="card mt-3">
+            <div class="card-header">
+                <h4>Price</h4>
+            </div>
+            <div class="card-body">
+
+                <label class="form-check-label d-block py-2">
+                    <input type="radio" wire:model.change="priceCheck" value="high-to-low" class="form-check-input">
+                <i class="input-helper"></i> High to low</label>
+                <label class="form-check-label d-block py-2">
+                    <input type="radio" wire:model.change="priceCheck" value="low-to-high" class="form-check-input">
+                <i class="input-helper"></i> Low to high</label>
+
+
+            </div>
+        </div>
+
     </div>
     <div class="col-md-9">
         <div class="row">
