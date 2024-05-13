@@ -13,7 +13,7 @@
                 <div class="product-view">
                     <h4 class="product-name">
                         {{ $product->name }}
-                        <label class="label-stock bg-success">In Stock</label>
+                        
                     </h4>
                     <hr>
                     <p class="product-path">
@@ -24,13 +24,35 @@
                         <span class="original-price">$ {{ $product->original_price }}</span>
                     </div>
                     <div class="form-group">
-                        @foreach ($product->colors as $color)
-                            <label class="form-check-label">
-                            <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1" value="{{ $color->id }}">
-                            {{ $color->color->name }}
-                            <i class="input-helper"></i></label>
+                        @if ($product->colors->count() > 0)
+                            @foreach ($product->colors as $color)
+                                <button wire:click='colorSelected({{ $color->id }})' class="form-check-label text-white" style="background-color: {{ $color->color->code }}">
+                                {{ $color->color->name }}
+                                </button>
+                                
+                            @endforeach
                             
-                        @endforeach
+                            <br/>
+                            <div wire:loading class="mt-3"">  
+                                <div class="spinner-border text-primary" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                  </div>
+                            </div>
+                            <div wire:loading.remove>
+                                @if ($this->productColorSelectedQty =='outOfStock')
+                                <label class="label-stock bg-danger mt-3">Out Of Stock</label>
+                                
+                                @elseif ($this->productColorSelectedQty > 0)
+                                <label class="label-stock bg-success mt-3">In Stock</label>
+                                @endif
+                            </div>
+                        @else
+                            @if ($product->quantity > 0)
+                                <label class="label-stock bg-success mt-3">In Stock</label>
+                            @else
+                            <label class="label-stock bg-danger mt-3">Out Of Stock</label>
+                            @endif
+                        @endif
                     </div>
                     <div class="mt-2">
                         <div class="input-group">
