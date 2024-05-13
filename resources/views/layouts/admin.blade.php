@@ -28,7 +28,7 @@
 
 <body>
     <div class="container-scroller">
-        @include('layouts.inc.admin.banner')
+        {{-- @include('layouts.inc.admin.banner') --}}
         <!-- partial:partials/_navbar.html -->
         @include('layouts.inc.admin.navbar')
         <!-- partial -->
@@ -73,7 +73,7 @@
     <!-- endinject -->
     <!-- Custom js for this page-->
     <script src="{{ asset('admin/assets/js/dashboard.js') }}"></script>
-    <script src="{{ asset('admin/assets/js/proBanner.js') }}"></script>
+    {{-- <script src="{{ asset('admin/assets/js/proBanner.js') }}"></script> --}}
 
     <!-- End custom js for this page-->
     <script src="{{ asset('admin/assets/js/jquery.cookie.js') }}" type="text/javascript"></script>
