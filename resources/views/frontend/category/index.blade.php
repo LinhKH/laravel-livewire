@@ -7,54 +7,25 @@
             <div class="col-md-12">
                 <h4 class="mb-4">Our Categories</h4>
             </div>
+            @forelse ($categories as $category)
+                
             <div class="col-6 col-md-3">
                 <div class="category-card">
                     <a href="">
                         <div class="category-card-img">
-                            <img src="laptop.jpg" class="w-100" alt="Laptop">
+                            <img src="{{ asset($category->image) }}" class="w-100" alt="{{ $category->name }}">
                         </div>
                         <div class="category-card-body">
-                            <h5>Laptop</h5>
+                            <h5>{{ $category->name }}</h5>
                         </div>
                     </a>
                 </div>
             </div>
-            <div class="col-6 col-md-3">
-                <div class="category-card">
-                    <a href="">
-                        <div class="category-card-img">
-                            <img src="mobile.jpg" class="w-100" alt="Mobile Devices">
-                        </div>
-                        <div class="category-card-body">
-                            <h5>Mobile</h5>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-6 col-md-3">
-                <div class="category-card">
-                    <a href="">
-                        <div class="category-card-img">
-                            <img src="mens-fashion.jpg" class="w-100" alt="Mens Fashion">
-                        </div>
-                        <div class="category-card-body">
-                            <h5>Mens Fashion</h5>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-6 col-md-3">
-                <div class="category-card">
-                    <a href="">
-                        <div class="category-card-img">
-                            <img src="women.jpg" class="w-100" alt="Women Fashion">
-                        </div>
-                        <div class="category-card-body">
-                            <h5>Women Fashion</h5>
-                        </div>
-                    </a>
-                </div>
-            </div>
+            @empty
+                <div class="col-md-12">No categories available</div>
+            @endforelse
+
+            
         </div>
     </div>
 </div>
