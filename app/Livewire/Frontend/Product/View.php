@@ -36,6 +36,10 @@ class View extends Component
             if($wishlist)
             {
                 session()->flash('message', 'Already have added Wishlist');
+                $this->dispatch('alertyfy', [
+                    'text'=> 'Already have added Wishlist',
+                    'type' => 'warning',
+                ]);
             }
             else
             {

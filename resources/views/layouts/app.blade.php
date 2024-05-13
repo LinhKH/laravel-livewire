@@ -106,7 +106,7 @@
     <script>
         window.addEventListener('alertyfy', event => {
             alertify.set('notifier','position', 'top-right');
-            alertify.success(event.detail.text + '!');
+            alertify.notify(event.detail[0].text + '!', event.detail[0].type);
         });
     </script>
     @livewireScripts
