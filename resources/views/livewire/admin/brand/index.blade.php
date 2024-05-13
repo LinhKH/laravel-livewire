@@ -15,6 +15,9 @@
                                 Name
                             </th>
                             <th>
+                                Category
+                            </th>
+                            <th>
                                 Slug
                             </th>
                             <th>
@@ -34,6 +37,9 @@
                                 </td>
                                 <td>
                                     {{ $brand->name }}
+                                </td>
+                                <td>
+                                    {{ $brand->category?->name }}
                                 </td>
                                 <td>
                                     {{ $brand->slug }}
