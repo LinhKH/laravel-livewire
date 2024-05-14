@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Frontend\Product;
 
+use App\Models\Cart;
 use App\Models\WishList;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -10,6 +11,8 @@ class View extends Component
 {
     public $product;
     public $category;
+    public $productColorId;
+    public $quantityCount = 1;
 
     public $productColorSelectedQty;
 
@@ -19,12 +22,124 @@ class View extends Component
         $this->category = $category;
     }
 
-    function colorSelected($color_id)
+    function colorSelected($product_color_id)
     {
-        $productColrors = $this->product->colors()->where(['id' => $color_id])->first();
+        $this->productColorId = $product_color_id;
+        $productColrors = $this->product->colors()->where(['id' => $product_color_id])->first();
         $this->productColorSelectedQty = $productColrors->quantity == 0 ? 'outOfStock' : $productColrors->quantity;
 
+    }
+
+    function descrementQty()
+    {
+        if($this->quantityCount > 0)
+        {
+            $this->quantityCount--;
+        }
+    }
+    function incrementQty()
+    {
+        $this->quantityCount++;
+    }
+
+    function addToCard($product_id)
+    {
+        if(Auth::check())
+        {
+            if($this->product->where(['id' => $product_id])->where('status','0')->exists())
+            {
+                if($this->product->colors->count() > 1){
+                    if($this->productColorSelectedQty != null) {
+                        //color selected
+
+                        if($this->productColorSelectedQty != 'outOfStock')
+                        {
+                            if(Cart::where('user_id', Auth::id())->where('product_id', $product_id)->where('product_color_id',$this->productColorId)->exists())
+                            {
+                                $this->dispatch('alertyfy', [
+                                    'text'=> 'Product Already Added to card',
+                                    'type' =>'warning',
+                                ]);
+                            } else {
+                                if($this->productColorSelectedQty > $this->quantityCount) {
+                                    // add to card with color
+                                    // dd('add to card with color');
         
+                                    Cart::create([
+                                        'user_id' => Auth::id(),
+                                        'product_id' => $product_id,
+                                        'product_color_id' => $this->productColorId,
+                                        'quantity' => $this->quantityCount,
+                                    ]);
+                                    $this->dispatch('alertyfy', [
+                                        'text'=> 'Product added to card',
+                                        'type' =>'success',
+                                    ]);
+                                } else {
+                                    // add to card without color
+                                    // dd('add to card without color');
+                                    $this->dispatch('alertyfy', [
+                                        'text'=> 'Only '.$this->productColorSelectedQty.' Quantity Available',
+                                        'type' => 'warning',
+                                    ]);
+                                }
+                            }
+                        }
+
+
+                    } else {
+                        $this->dispatch('alertyfy', [
+                            'text'=> 'Please select color',
+                            'type' => 'success',
+                        ]);
+                    }
+                } else {
+                    if(Cart::where('user_id', Auth::id())->where('product_id', $product_id)->exists())
+                    {
+                        $this->dispatch('alertyfy', [
+                            'text'=> 'Product Already Added to card',
+                            'type' =>'warning',
+                        ]);
+                    } else {
+                        if($this->product->quantity > 0)
+                        {
+                            if($this->product->quantity > $this->quantityCount)
+                            {
+                                Cart::create([
+                                    'user_id' => Auth::id(),
+                                    'product_id' => $product_id,
+                                    'quantity' => $this->quantityCount,
+                                ]);
+                                $this->dispatch('alertyfy', [
+                                    'text'=> 'Product added to card',
+                                    'type' =>'success',
+                                ]);
+                            } else {
+                                $this->dispatch('alertyfy', [
+                                    'text'=> 'Only '.$this->product->quantity.' Quantity Available',
+                                    'type' => 'warning',
+                                ]);
+                            }
+                        } else {
+                            $this->dispatch('alertyfy', [
+                                'text'=> 'Product is out of stock',
+                                'type' => 'warning',
+                            ]);
+                        }
+                    }
+                }
+            } else {
+                $this->dispatch('alertyfy', [
+                    'text'=> 'Product is not available',
+                    'type' => 'warning',
+                ]);
+            }
+        } else {
+            $this->dispatch('alertyfy', [
+                'text'=> 'Please login to add product to card',
+                'type' =>'warning',
+            ]);
+        }
     }
 
     function addToWishlist($product_id)
