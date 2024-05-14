@@ -9,8 +9,11 @@ Route::get('/collections/{category_slug}/{product_slug}', [App\Http\Controllers\
 Route::middleware(['auth'])->group(function() {
     Route::get('/wishlists', [App\Http\Controllers\Frontend\WishlistController::class, 'index']);
     Route::get('/carts', [App\Http\Controllers\Frontend\CartController::class, 'index']);
+    Route::get('/checkout', [App\Http\Controllers\Frontend\CheckoutController::class, 'index']);
 
 });
+
+Route::get('/thanks-order', [App\Http\Controllers\Frontend\CheckoutController::class, 'thanksOrder']);
 Auth::routes();
 
 
