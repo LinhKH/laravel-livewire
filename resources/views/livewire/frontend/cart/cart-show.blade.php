@@ -7,7 +7,7 @@
 
                     <div class="cart-header d-none d-sm-none d-mb-block d-lg-block">
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-5">
                                 <h4>Products</h4>
                             </div>
                             <div class="col-md-2">
@@ -15,6 +15,9 @@
                             </div>
                             <div class="col-md-2">
                                 <h4>Quantity</h4>
+                            </div>
+                            <div class="col-md-1">
+                                <h4>Price</h4>
                             </div>
                             <div class="col-md-2">
                                 <h4>Remove</h4>
@@ -24,7 +27,7 @@
                     @forelse ($carts as $cart)
                     <div class="cart-item">
                         <div class="row">
-                            <div class="col-md-6 my-auto">
+                            <div class="col-md-5 my-auto">
                                 <a
                                     href="{{ url('/collections/'.$cart->product->category->slug. '/'. $cart->product->slug) }}">
                                     <label class="product-name">
@@ -55,6 +58,10 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-md-1 my-auto">
+                                <label class="price">$ {{ $cart->product->selling_price * $cart->quantity }} </label>
+                                @php $totalPrice += $cart->product->selling_price * $cart->quantity @endphp
+                            </div>
                             <div class="col-md-2 col-5 my-auto">
                                 <div class="remove">
                                     <a href="javascript:void(0)" wire:click="deleteCartItem({{ $cart->id }})"
@@ -80,6 +87,18 @@
                     </div>
                     @endforelse
 
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8 my-md-auto mt-3">
+                <h5>Get the best deals & offers <a href="{{ url('/collections') }}">Shop now</a></h5>
+            </div>
+            <div class="col-md-4 mt-3">
+                <div class="shadow-sm bg-white p-3">
+                    <h4>Total: <span class="float-end">$ {{ $totalPrice }}</span></h4>
+                    <hr>
+                    <a href="" class="btn btn-warning w-100">Checkout</a>
                 </div>
             </div>
         </div>

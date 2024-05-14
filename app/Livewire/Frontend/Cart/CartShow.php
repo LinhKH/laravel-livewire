@@ -9,6 +9,7 @@ use Livewire\Component;
 class CartShow extends Component
 {
 
+    public $totalPrice;
     public $cartQuantity;
 
     #[On('cart-delete')]
