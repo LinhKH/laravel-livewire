@@ -3,6 +3,8 @@
 namespace App\Livewire\Frontend\Product;
 
 use App\Models\Product;
+use App\Models\WishList;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class Index extends Component
@@ -18,6 +20,39 @@ class Index extends Component
     {
         $this->products = $products;
         // $this->category = $category;
+    }
+
+    function addToWishlist($product_id)
+    {
+        if(Auth::check())
+        {
+            $wishlist = WishList::where(['user_id' => Auth::id(), 'product_id' => $product_id])->first();
+
+            if($wishlist)
+            {
+                session()->flash('message', 'Already have added Wishlist');
+                $this->dispatch('alertyfy', [
+                    'text'=> 'Already have added Wishlist',
+                    'type' => 'warning',
+                ]);
+            }
+            else
+            {
+                WishList::create([
+                    'user_id' => Auth::id(),
+                    'product_id' => $product_id,
+                ]);
+                $this->dispatch('wishlist-deleted'); 
+                $this->dispatch('alertyfy', [
+                    'text'=> 'Added Wishlist Successfully',
+                    'type' => 'success',
+                ]);
+            }
+        } else {
+            session()->flash('message', 'Please login to add product to wishlist');
+        }
+
+        
     }
     public function render()
     {

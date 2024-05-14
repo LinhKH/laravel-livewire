@@ -105,7 +105,7 @@
     @endif
     <script>
         window.addEventListener('alertyfy', event => {
-            alertify.set('notifier','position', 'top-right');
+            alertify.set('notifier','position', 'bottom-right');
             alertify.notify(event.detail[0].text + '!', event.detail[0].type);
         });
     </script>

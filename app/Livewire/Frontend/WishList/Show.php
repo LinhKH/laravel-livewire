@@ -12,10 +12,13 @@ class Show extends Component
     {
         WishList::findOrFail($wish_list_id)->delete();
 
+        $this->dispatch('wishlist-deleted'); 
+
         $this->dispatch('alertyfy', [
             'text' => 'Product has been deleted from wishlist',
             'type' => 'success',
         ]);
+        
     }
     public function render()
     {
