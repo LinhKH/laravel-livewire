@@ -8,6 +8,7 @@ Route::get('/collections/{category_slug}', [App\Http\Controllers\Frontend\Fronte
 Route::get('/collections/{category_slug}/{product_slug}', [App\Http\Controllers\Frontend\FrontendController::class, 'prooductDetail']);
 Route::middleware(['auth'])->group(function() {
     Route::get('/wishlists', [App\Http\Controllers\Frontend\WishlistController::class, 'index']);
+    Route::get('/carts', [App\Http\Controllers\Frontend\CartController::class, 'index']);
 
 });
 Auth::routes();
