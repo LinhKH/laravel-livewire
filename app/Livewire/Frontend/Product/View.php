@@ -61,7 +61,7 @@ class View extends Component
                                     'type' =>'warning',
                                 ]);
                             } else {
-                                if($this->productColorSelectedQty > $this->quantityCount) {
+                                if($this->productColorSelectedQty >= $this->quantityCount) {
                                     // add to card with color
                                     // dd('add to card with color');
         
@@ -71,6 +71,7 @@ class View extends Component
                                         'product_color_id' => $this->productColorId,
                                         'quantity' => $this->quantityCount,
                                     ]);
+                                    $this->dispatch('cart-added-updated');
                                     $this->dispatch('alertyfy', [
                                         'text'=> 'Product added to card',
                                         'type' =>'success',
@@ -90,7 +91,7 @@ class View extends Component
                     } else {
                         $this->dispatch('alertyfy', [
                             'text'=> 'Please select color',
-                            'type' => 'success',
+                            'type' => 'error',
                         ]);
                     }
                 } else {
@@ -103,13 +104,14 @@ class View extends Component
                     } else {
                         if($this->product->quantity > 0)
                         {
-                            if($this->product->quantity > $this->quantityCount)
+                            if($this->product->quantity >= $this->quantityCount)
                             {
                                 Cart::create([
                                     'user_id' => Auth::id(),
                                     'product_id' => $product_id,
                                     'quantity' => $this->quantityCount,
                                 ]);
+                                $this->dispatch('cart-added-updated');
                                 $this->dispatch('alertyfy', [
                                     'text'=> 'Product added to card',
                                     'type' =>'success',
