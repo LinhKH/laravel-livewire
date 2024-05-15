@@ -112,6 +112,8 @@
             alertify.notify(event.detail[0].text + '!', event.detail[0].type);
         });
     </script>
+
+    @stack('scripts')
     @livewireScripts
 </body>
 </html>

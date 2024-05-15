@@ -5,6 +5,7 @@ namespace App\Livewire\Frontend\Checkout;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\OrderItem;
+use Livewire\Attributes\On;
 use Livewire\Component;
 use Illuminate\Support\Str;
 
@@ -20,6 +21,35 @@ class CheckoutShow extends Component
         $payment_mode = '',
         $payment_id = '';
 
+
+    #[On('validationAll')]
+    function validationForAll()
+    {
+        return $this->validate();
+    }
+    #[On('transaction-completed')]
+    function onlineOrder($payment_id)
+    {
+        $this->payment_id = $payment_id;
+        $this->payment_mode = 'Paid By Paypal';
+        $onlOrder = $this->placeOrder();
+        if($onlOrder) 
+        {
+            Cart::where('user_id', auth()->user()->id)->delete();
+            $this->dispatch('cart-added-updated');
+            session()->flash('message','Order Placed Successfully');
+            $this->dispatch('alertyfy', [
+                'text'=> 'Order Placed Successfully',
+                'type' => 'success',
+            ]);
+            return redirect()->to('/thanks-order');
+        } else {
+            $this->dispatch('alertyfy', [
+                'text'=> 'Something Went Wrong',
+                'type' => 'error',
+            ]);
+        }
+    }
     function rules()
     {
         return [
