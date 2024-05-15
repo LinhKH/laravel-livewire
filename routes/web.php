@@ -10,6 +10,8 @@ Route::middleware(['auth'])->group(function() {
     Route::get('/wishlists', [App\Http\Controllers\Frontend\WishlistController::class, 'index']);
     Route::get('/carts', [App\Http\Controllers\Frontend\CartController::class, 'index']);
     Route::get('/checkout', [App\Http\Controllers\Frontend\CheckoutController::class, 'index']);
+    Route::get('/my-orders', [App\Http\Controllers\Frontend\OrderController::class, 'index']);
+    Route::get('/my-order/{order_id}', [App\Http\Controllers\Frontend\OrderController::class, 'show']);
 
 });
 
