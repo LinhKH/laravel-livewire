@@ -7,9 +7,15 @@
             </a>
         </li>
         <li class="nav-item">
+            <a class="nav-link" href="{{ url('admin/orders') }}">
+                <i class="mdi mdi-cash-multiple menu-icon"></i>
+                <span class="menu-title">Orders</span>
+            </a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false"
                 aria-controls="ui-basic">
-                <i class="mdi mdi-circle-outline menu-icon"></i>
+                <i class="mdi mdi-file-tree menu-icon"></i>
                 <span class="menu-title">Categories</span>
                 <i class="menu-arrow"></i>
             </a>
@@ -23,22 +29,15 @@
             </div>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="collapse" href="#form-elements" aria-expanded="false"
-                aria-controls="form-elements">
+            <a class="nav-link" href="{{ url('admin/brands') }}">
                 <i class="mdi mdi-view-headline menu-icon"></i>
                 <span class="menu-title">Brands</span>
-                <i class="menu-arrow"></i>
             </a>
-            <div class="collapse" id="form-elements">
-                <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"><a class="nav-link" href="{{ url('/admin/brands') }}">Bands List</a></li>
-                </ul>
-            </div>
         </li>
         <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#ui-product" aria-expanded="false"
                 aria-controls="ui-product">
-                <i class="mdi mdi-circle-outline menu-icon"></i>
+                <i class="mdi mdi-shopping menu-icon"></i>
                 <span class="menu-title">Products</span>
                 <i class="menu-arrow"></i>
             </a>
@@ -52,17 +51,10 @@
             </div>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="collapse" href="#product-color" aria-expanded="false"
-                aria-controls="product-color">
-                <i class="mdi mdi-view-headline menu-icon"></i>
+            <a class="nav-link" href="{{ url('/admin/color') }}" >
+                <i class="mdi mdi-format-color-fill menu-icon"></i>
                 <span class="menu-title">Colors</span>
-                <i class="menu-arrow"></i>
             </a>
-            <div class="collapse" id="product-color">
-                <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"><a class="nav-link" href="{{ url('/admin/color') }}">Colors List</a></li>
-                </ul>
-            </div>
         </li>
         <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#charts" aria-expanded="false"
