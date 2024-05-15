@@ -47,14 +47,24 @@ class CheckoutShow extends Component
             'payment_id' => $this->payment_id,
         ]);
 
-        foreach ($this->carts as $cart) {
+        foreach ($this->carts as $cartItem) {
             OrderItem::create([
                 'order_id' => $order->id,
-                'product_id' => $cart->product_id,
-                'product_color_id' => $cart->product_color_id,
-                'quantity' => $cart->quantity,
-                'price' => $cart->product->selling_price,
+                'product_id' => $cartItem->product_id,
+                'product_color_id' => $cartItem->product_color_id,
+                'quantity' => $cartItem->quantity,
+                'price' => $cartItem->product->selling_price,
             ]);
+
+            if($cartItem->product_color_id !== null){
+                $cartItem->product_color->where('id', $cartItem->product_color_id)->update([
+                    'quantity' => $cartItem->product_color->quantity - (int)$cartItem->quantity,
+                ]);
+            } else {
+                $cartItem->product->where('id', $cartItem->product_id)->update([
+                    'quantity' => $cartItem->product->quantity - (int)$cartItem->quantity,
+                ]);
+            }
         }
 
         return $order;
@@ -68,6 +78,7 @@ class CheckoutShow extends Component
         {
             Cart::where('user_id', auth()->user()->id)->delete();
             $this->dispatch('cart-added-updated');
+            session()->flash('message','Order Placed Successfully');
             $this->dispatch('alertyfy', [
                 'text'=> 'Order Placed Successfully',
                 'type' => 'success',
@@ -90,6 +101,8 @@ class CheckoutShow extends Component
     }
     public function render()
     {
+        $this->full_name = auth()->user()->name;
+        $this->email = auth()->user()->email;
         $this->totalProductAmout();
         return view('livewire.frontend.checkout.checkout-show', [
             'totalProcutAmout' => $this->totalProcutAmout,

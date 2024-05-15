@@ -44,7 +44,7 @@
                                         <input type="checkbox" name="status" value="{{ $color->status }}" {{ $color->status == 1 ? 'checked' : '' }} id="status" class="form-check-input">
                                     </label>
                                 </div>
-                                <span>(checked=visible, uncheck=hidden)</span>
+                                <span>(checked=hidden, uncheck=visible)</span>
                             </div>
 
                         </div>

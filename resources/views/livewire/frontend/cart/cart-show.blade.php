@@ -90,6 +90,7 @@
                 </div>
             </div>
         </div>
+        @if ($carts->count() > 0)
         <div class="row">
             <div class="col-md-8 my-md-auto mt-3">
                 <h5>Get the best deals & offers <a href="{{ url('/collections') }}">Shop now</a></h5>
@@ -102,6 +103,7 @@
                 </div>
             </div>
         </div>
+        @endif
 
     </div>
 </div>

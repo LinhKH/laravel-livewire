@@ -77,7 +77,7 @@
                                             class="form-check-input">
                                     </label>
                                 </div>
-                                <span>(checked=visible, uncheck=hidden)</span>
+                                <span>(checked=hidden, uncheck=visible)</span>
                             </div>
                         </div>
 
