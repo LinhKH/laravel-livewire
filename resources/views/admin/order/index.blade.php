@@ -9,6 +9,39 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
+                    <form action="{{ url('admin/orders') }}" method="GET">
+                        <div class="row mb-3">
+                            <div class="col-sm">
+                                <label for="">Filter by date</label>
+                                <input type="date" name="filter_date" value="{{ Request::get('filter_date') ?? date('Y-m-d') }}" class="form-control" style="height: 39px">
+                            </div>
+                            <div class="col-sm">
+                                <label for="">Filter by status</label>
+                                <select name="filter_status" id="" class="form-control">
+                                    <option value="">All</option>
+                                    <option value="in progress" {{ Request::get('filter_status') == 'in progress' ? 'selected' : '' }}>In Progress</option>
+                                    <option value="completed" {{ Request::get('filter_status') == 'completed' ? 'selected' : '' }}>Completed</option>
+                                    <option value="pending" {{ Request::get('filter_status') == 'pending' ? 'selected' : '' }}>Pending</option>
+                                    <option value="cancelled" {{ Request::get('filter_status') == 'cancelled' ? 'selected' : '' }}>Cancelled</option>
+                                    <option value="out-for-delivery" {{ Request::get('filter_status') == 'out-for-delivery' ? 'selected' : '' }}>Out for delivery</option>
+                                </select>
+        
+                            </div>
+                            <div class="col-sm">
+                                <label for="">Filter by Payment</label>
+                                <select name="filter_payment_mode" id="" class="form-control">
+                                    <option value="">All</option>
+                                    <option value="Paid By Paypal" {{ Request::get('filter_payment_mode') == 'Paid By Paypal' ? 'selected' : '' }}>Paid By Paypal</option>
+                                    <option value="Cash on Delivery" {{ Request::get('filter_payment_mode') == 'Cash on Delivery' ? 'selected' : '' }}>Cash on Delivery</option>
+                                </select>
+        
+                            </div>
+                            <div class="col-sm">
+                                <br>
+                                <button type="submit" class="btn btn-primary">Filter</button>
+                            </div>
+                        </div>
+                    </form>
                     <table class="table table-bordered table-striped">
                         <thead>
                             <th>Order ID</th>
