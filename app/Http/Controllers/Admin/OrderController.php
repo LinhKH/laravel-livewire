@@ -19,4 +19,15 @@ class OrderController extends Controller
         $order = Order::findOrFail($order_id);
         return view('admin.order.show', compact('order'));
     }
+    function updateOrderStatus($order_id)
+    {
+        $order = Order::findOrFail($order_id);
+
+        $order->update([
+            'status_message' => request('status_message')
+        ]);
+
+        return redirect()->back()->with('message', 'Order Status Updated Successfully');
+
+    }
 }

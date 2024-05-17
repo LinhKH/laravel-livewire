@@ -56,6 +56,7 @@ Route::prefix('admin')->middleware(['auth', 'is_admin'])->group(function() {
     Route::controller(App\Http\Controllers\Admin\OrderController::class)->group(function() {
         Route::get('/orders','index')->name('order.index');
         Route::get('/order/{order_id}','show')->name('order.show');
+        Route::put('/order/{order_id}','updateOrderStatus')->name('order.updateOrderStatus');
     });
 
     Route::get('/brands' , App\Livewire\Admin\Brand\Index::class);

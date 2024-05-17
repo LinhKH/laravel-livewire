@@ -31,6 +31,53 @@
                     <button class="btn btn-primary mt-2 mt-xl-0">Download report</button>
                 </div>
             </div>
+
+        </div>
+        <div class="p-4 shadow bg-white">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="card card-body bg-primary text-white mb-3">
+                        <label for="">Total Order</label>
+                        <h1>{{ $totalOrder }}</h1>
+                        <a href="{{ url('admin/orders') }}" class="text-white">View</a>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card card-body bg-behance text-white mb-3">
+                        <label for="">Today Order</label>
+                        <h1>{{ $todayOrder }}</h1>
+                        <a href="{{ url('admin/orders') }}" class="text-white">View</a>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card card-body bg-danger-subtle text-white mb-3">
+                        <label for="">This Month Order</label>
+                        <h1>{{ $thisMonthOrder }}</h1>
+                        <a href="{{ url('admin/orders') }}" class="text-white">View</a>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card card-body bg-danger text-white mb-3">
+                        <label for="">This Year Order</label>
+                        <h1>{{ $thisYearOrder }}</h1>
+                        <a href="{{ url('admin/orders') }}" class="text-white">View</a>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card card-body bg-success text-white mb-3">
+                        <label for="">Total Products</label>
+                        <h1>{{ $totalProducts }}</h1>
+                        <a href="{{ url('admin/products') }}" class="text-white">View</a>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card card-body bg-primary text-white mb-3">
+                        <label for="">Total Users</label>
+                        <h1>{{ $totalUsers }}</h1>
+                        <a href="{{ url('admin/products') }}" class="text-white">View</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 @endsection
