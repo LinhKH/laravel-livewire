@@ -66,7 +66,7 @@ class CheckoutShow extends Component
         $this->validate();
         $order = Order::create([
             'user_id' => auth()->user()->id, 
-            'tracking_no' => 'ORD-' . Str::random(10),
+            'tracking_no' => 'ORD - ' . Str::random(10),
             'full_name' => $this->full_name,
             'email' => $this->email,
             'phone_number' => $this->phone_number,

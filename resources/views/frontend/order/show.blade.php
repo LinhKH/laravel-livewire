@@ -39,6 +39,21 @@
                         </div>
                     </div>
                     <br />
+                    @php
+                        $arrStatus = [
+                            ['status' => 'Pending', 'icon' => 'fa-check'],
+                            ['status' => 'In Progress', 'icon' => 'fa-line-chart'],
+                            ['status' => 'Delivering', 'icon' => 'fa-truck'],
+                            ['status' => 'Cancelled', 'icon' => 'fa-trash'],
+                            ['status' => 'Completed', 'icon' => 'fa-dollar'],
+                        ];
+                        $stepStatus = array_search($order->status_message, array_column($arrStatus, 'status'));
+                    @endphp
+                    <div class="track">
+                        @foreach ($arrStatus as $key => $trackStatus)
+                            <div class="step {{ $key <= $stepStatus ? 'active' : '' }}"> <span class="icon"> <i class="fa {{ $trackStatus['icon'] }}"></i> </span> <span class="text">{{ $trackStatus['status'] }}</span> </div>
+                        @endforeach
+                    </div>
                     <h5>Order Items</h5><hr>
                     <div class="table-responsive">
                         <table class="table table-bordered table-striped">
@@ -58,7 +73,7 @@
                                     <tr>
                                         <td>{{ $order_item->id }}</td>
                                         <td>
-                                            @if ($order_item->product->images)
+                                            @if ($order_item->product->images->count() > 0 )
                                             <img src="{{ asset($order_item->product->images[0]->image) }}" alt="" width="50" height="50">
                                             @else
                                             <img src="" alt="" width="50" height="50">

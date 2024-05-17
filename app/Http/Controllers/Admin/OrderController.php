@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Order;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class OrderController extends Controller
 {
@@ -41,5 +42,19 @@ class OrderController extends Controller
 
         return redirect()->back()->with('message', 'Order Status Updated Successfully');
 
+    }
+
+    function viewInvoice($order_id)
+    {
+        $order = Order::findOrFail($order_id);
+        return view('admin.order.invoice', compact('order'));
+    }
+    function generateInvoice($order_id)
+    {
+        $order = Order::findOrFail($order_id);
+        $pdf = Pdf::loadView('admin.order.invoice', ['order' => $order]);
+
+        $todayDate = Carbon::now()->format('Y-m-d');
+        return $pdf->download('invoice'.$order->id.'-'. $todayDate.'.pdf');
     }
 }

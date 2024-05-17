@@ -11,7 +11,9 @@
                 <div class="p-4 shadow bg-white">
                     <h4 class="mb-4">
                         <i class="fa fa-shopping-cart text-dark"></i> My Orders Detail
-                        <a href="{{ url('/admin/orders') }}" class="btn btn-danger float-end btn-sm">Back</a>
+                        <a href="{{ url('/admin/orders') }}" class="btn btn-danger float-end btn-sm mx-1">Back</a>
+                        <a href="{{ url('/admin/invoice/' .$order->id.'/generate') }}" class="btn btn-primary float-end btn-sm mx-1">Download Invoice</a>
+                        <a href="{{ url('/admin/invoice/'. $order->id) }}" target="_blank" class="btn btn-warning float-end btn-sm mx-1">View Invoice</a>
                     </h4>
                     <hr />
                     <div class="row">

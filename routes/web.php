@@ -57,6 +57,9 @@ Route::prefix('admin')->middleware(['auth', 'is_admin'])->group(function() {
         Route::get('/orders','index')->name('order.index');
         Route::get('/order/{order_id}','show')->name('order.show');
         Route::put('/order/{order_id}','updateOrderStatus')->name('order.updateOrderStatus');
+
+        Route::get('/invoice/{order_id}','viewInvoice')->name('invoice.viewInvoice');
+        Route::get('/invoice/{order_id}/generate','generateInvoice')->name('invoice.generateInvoice');
     });
 
     Route::get('/brands' , App\Livewire\Admin\Brand\Index::class);
