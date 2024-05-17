@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Frontend\Checkout;
 
+use App\Enums\OrderStatus;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\OrderItem;
@@ -72,7 +73,7 @@ class CheckoutShow extends Component
             'phone_number' => $this->phone_number,
             'pincode' => $this->pincode,
             'address' => $this->address,
-            'status_message' => 'in progress',
+            'status_message' => OrderStatus::Pending,
             'payment_mode' => $this->payment_mode,
             'payment_id' => $this->payment_id,
         ]);

@@ -14,18 +14,33 @@ namespace App\Enums;
  * @author  Zura Sekhniashvili <zurasekhniashvili@gmail.com>
  * @package App\Enums
  */
-enum OrderStatus: string
+enum OrderStatus: int
 {
-    case Unpaid = 'unpaid';
-    case Paid = 'paid';
-    case Cancelled = 'cancelled';
-    case Shipped = 'shipped';
-    case Completed = 'completed';
+    case Pending = 1;
+    case Progress = 2;
+    case Delivering = 3;
+    case Cancelled = 4;
+    case Completed = 5;
 
-    public static function getStatuses()
+    public function status(): string
     {
-        return [
-            self::Paid, self::Unpaid, self::Cancelled, self::Shipped, self::Completed
-        ];
+        return match ($this) {
+            OrderStatus::Pending => 'Pending',
+            OrderStatus::Progress => 'Progress',
+            OrderStatus::Delivering => 'Delivering',
+            OrderStatus::Cancelled => 'Cancelled',
+            OrderStatus::Completed => 'Completed',
+        };
+    }
+
+    public function icon(): string
+    {
+        return match ($this) {
+            OrderStatus::Pending => 'fa-check',
+            OrderStatus::Progress => 'fa-line-chart',
+            OrderStatus::Delivering => 'fa-truck',
+            OrderStatus::Cancelled => 'fa-trash',
+            OrderStatus::Completed => 'fa-dollar',
+        };
     }
 }

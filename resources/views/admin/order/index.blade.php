@@ -19,11 +19,9 @@
                                 <label for="">Filter by status</label>
                                 <select name="filter_status" id="" class="form-control">
                                     <option value="">All</option>
-                                    <option value="in progress" {{ Request::get('filter_status') == 'in progress' ? 'selected' : '' }}>In Progress</option>
-                                    <option value="completed" {{ Request::get('filter_status') == 'completed' ? 'selected' : '' }}>Completed</option>
-                                    <option value="pending" {{ Request::get('filter_status') == 'pending' ? 'selected' : '' }}>Pending</option>
-                                    <option value="cancelled" {{ Request::get('filter_status') == 'cancelled' ? 'selected' : '' }}>Cancelled</option>
-                                    <option value="out-for-delivery" {{ Request::get('filter_status') == 'out-for-delivery' ? 'selected' : '' }}>Out for delivery</option>
+                                    @foreach (App\Enums\OrderStatus::cases() as $orderStatus)
+                                        <option value="{{ $orderStatus->value }}" {{ Request::get('filter_status') == $orderStatus->value ? 'selected' : '' }}>{{ $orderStatus->name }}</option>
+                                    @endforeach
                                 </select>
         
                             </div>
@@ -60,7 +58,7 @@
                                 <td>{{ $order->full_name }}</td>
                                 <td>{{ $order->payment_mode }}</td>
                                 <td>{{ $order->created_at }}</td>
-                                <td>{{ $order->status_message }}</td>
+                                <td>{{ App\Enums\OrderStatus::from($order->status_message)->status() }}</td>
                                 <td>
                                     <a href="{{ url('/admin/order/'. $order->id ) }}"
                                         class="btn btn-primary btn-sm">View</a>
@@ -68,7 +66,7 @@
                             </tr>
                             @empty
                             <tr>
-                                <td colspan="7">No Data</td>
+                                <td colspan="7" class="text-center">No Data</td>
                             </tr>
                             @endforelse
 

@@ -35,7 +35,20 @@ class OrderController extends Controller
     function updateOrderStatus($order_id)
     {
         $order = Order::findOrFail($order_id);
+        if (request('status_message') == 4) {
 
+            foreach ($order->order_items as $orderItem) {
+                if ($orderItem->product_color_id !== null) {
+                    $orderItem->product_color->where('id', $orderItem->product_color_id)->update([
+                        'quantity' => $orderItem->product_color->quantity + (int)$orderItem->quantity,
+                    ]);
+                } else {
+                    $orderItem->product->where('id', $orderItem->product_id)->update([
+                        'quantity' => $orderItem->product->quantity + (int)$orderItem->quantity,
+                    ]);
+                }
+            }
+        }
         $order->update([
             'status_message' => request('status_message')
         ]);

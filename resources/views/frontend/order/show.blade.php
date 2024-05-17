@@ -25,7 +25,7 @@
                             <h6>Order Date: {{ $order->created_at->format('d-m-Y h:i A') }}</h6>
                             <h6>Payment Mode: {{ $order->payment_mode }}</h6>
                             <h6 class="border p-2 text-success">
-                                Order Status Message: <span class="text-uppercase">{{ $order->status_message }}</span>
+                                Order Status Message: <span class="text-uppercase">{{ App\Enums\OrderStatus::from($order->status_message)->status() }}</span>
                             </h6>
                         </div>
                         <div class="col-md-6">
@@ -40,21 +40,16 @@
                     </div>
                     <br />
                     @php
-                        $arrStatus = [
-                            ['status' => 'Pending', 'icon' => 'fa-check'],
-                            ['status' => 'In Progress', 'icon' => 'fa-line-chart'],
-                            ['status' => 'Delivering', 'icon' => 'fa-truck'],
-                            ['status' => 'Cancelled', 'icon' => 'fa-trash'],
-                            ['status' => 'Completed', 'icon' => 'fa-dollar'],
-                        ];
-                        $stepStatus = array_search($order->status_message, array_column($arrStatus, 'status'));
+                        $arrStatus = App\Enums\OrderStatus::cases();
+                        // dd($arrStatus);
+                        $stepStatus = array_search($order->status_message, array_column($arrStatus, 'value'));
                     @endphp
                     <div class="track">
                         @foreach ($arrStatus as $key => $trackStatus)
-                            <div class="step {{ $key <= $stepStatus ? 'active' : '' }}"> <span class="icon"> <i class="fa {{ $trackStatus['icon'] }}"></i> </span> <span class="text">{{ $trackStatus['status'] }}</span> </div>
+                            <div class="step {{ $key <= $stepStatus ? 'active' : '' }}"> <span class="icon"> <i class="fa {{ App\Enums\OrderStatus::from($trackStatus->value)->icon() }}"></i> </span> <span class="text text-uppercase">{{ App\Enums\OrderStatus::from($trackStatus->value)->status() }}</span> </div>
                         @endforeach
                     </div>
-                    <h5>Order Items</h5><hr>
+                    <h5 class="text-uppercase">Order Items</h5><hr>
                     <div class="table-responsive">
                         <table class="table table-bordered table-striped">
                             <thead>
@@ -76,7 +71,7 @@
                                             @if ($order_item->product->images->count() > 0 )
                                             <img src="{{ asset($order_item->product->images[0]->image) }}" alt="" width="50" height="50">
                                             @else
-                                            <img src="" alt="" width="50" height="50">
+                                            <img src="{{ asset('assets/images/no-image.png') }}" alt="" width="50" height="50">
                                             @endif
                                         </td>
                                         <td>

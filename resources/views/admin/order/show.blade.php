@@ -25,7 +25,7 @@
                             <h6>Order Date: {{ $order->created_at->format('d-m-Y h:i A') }}</h6>
                             <h6>Payment Mode: {{ $order->payment_mode }}</h6>
                             <h6 class="border p-2 text-success">
-                                Order Status Message: <span class="text-uppercase">{{ $order->status_message }}</span>
+                                Order Status Message: <span class="text-uppercase">{{ App\Enums\OrderStatus::from($order->status_message)->status() }}</span>
                             </h6>
                         </div>
                         <div class="col-md-6">
@@ -61,7 +61,7 @@
                                             @if ($order_item->product->images->count() > 0)
                                             <img src="{{ asset($order_item->product->images[0]->image) }}" alt="" width="50" height="50">
                                             @else
-                                            <img src="" alt="" width="50" height="50">
+                                            <img src="{{ asset('assets/images/no-image.png') }}" alt="" width="50" height="50">
                                             @endif
                                         </td>
                                         <td>
@@ -106,13 +106,11 @@
                             @method('PUT')
                             <label for="">Update Your Order Status</label>
                             <div class="input-group">
-                                <select name="status_message" id="status_message" class="form-select">
+                                <select name="status_message" id="status_message" class="form-select form-select-sm">
                                     <option value="">Select Status</option>
-                                    <option value="in progress" {{ $order->status_message == 'in progress' ? 'selected' : '' }}>In Progress</option>
-                                    <option value="completed" {{ $order->status_message == 'completed' ? 'selected' : '' }}>Completed</option>
-                                    <option value="pending" {{ $order->status_message == 'pending' ? 'selected' : '' }}>Pending</option>
-                                    <option value="cancelled" {{ $order->status_message == 'cancelled' ? 'selected' : '' }}>Cancelled</option>
-                                    <option value="out-for-delivery" {{ $order->status_message == 'out-for-delivery' ? 'selected' : '' }}>Out for delivery</option>
+                                    @foreach (App\Enums\OrderStatus::cases() as $status_case)
+                                        <option value="{{ $status_case->value }}" {{ $order->status_message == $status_case->value ? 'selected' : '' }}>{{ $status_case->name }}</option>
+                                    @endforeach
                                 </select>
                                 <button type="submit" class="btn btn-primary text-white">Update</button>
                             </div>
@@ -120,7 +118,7 @@
                     </div>
                     <div class="col-md-7">
                         <br>
-                        <h4 class="mt-3">Current Order Status: <span class="text-uppercase">{{ $order->status_message }}</span></h4>
+                        <h4 class="mt-3">Current Order Status: <span class="text-uppercase">{{ App\Enums\OrderStatus::from($order->status_message)->status() }}</span></h4>
                     </div>
                 </div>
             </div>
