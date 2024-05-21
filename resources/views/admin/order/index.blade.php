@@ -13,7 +13,7 @@
                         <div class="row mb-3">
                             <div class="col-sm">
                                 <label for="">Filter by date</label>
-                                <input type="date" name="filter_date" value="{{ Request::get('filter_date') ?? date('Y-m-d') }}" class="form-control" style="height: 39px">
+                                <input type="date" name="filter_date" value="{{ Request::get('filter_date') ?? '' }}" class="form-control" style="height: 39px">
                             </div>
                             <div class="col-sm">
                                 <label for="">Filter by status</label>

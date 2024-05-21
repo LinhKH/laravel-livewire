@@ -16,7 +16,7 @@ class OrderController extends Controller
         $orders = Order::when($request->filter_date != null, function ($query) use ($request) { 
             return $query->whereDate('created_at', $request->filter_date);
         }, function ($query) use ($todayDate) {
-            return $query->whereDate('created_at', $todayDate);
+            // return $query->whereDate('created_at', $todayDate);
         })->when($request->filter_status != null, function ($query) use ($request) {
             return $query->where('status_message', $request->filter_status);
         })->when($request->filter_payment_mode != null, function ($query) use ($request) {

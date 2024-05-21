@@ -14,11 +14,16 @@
     <meta name="keywowrds" content="@yield('keywowrds')">
     <meta name="author" content="Linh Kieu">
     
-    <!-- Fonts -->
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ asset('assets/css/owl.carousel.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/owl.theme.default.min.css') }}">
 
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
@@ -100,6 +105,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
+    <script src="{{ asset('assets/js/owl.carousel.min.js') }}"></script>
+
     @if (session('message'))
         <script>
             alertify.set('notifier','position', 'top-right');
@@ -112,7 +119,9 @@
             alertify.notify(event.detail[0].text + '!', event.detail[0].type);
         });
     </script>
-
+    <script>
+        @yield('script')
+    </script>
     @stack('scripts')
     @livewireScripts
 </body>
