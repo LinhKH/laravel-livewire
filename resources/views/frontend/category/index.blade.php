@@ -5,7 +5,8 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h4 class="mb-4">Our Categories</h4>
+                <h4 class="text-uppercase">Our Categories</h4>
+                <div class="underline mb-4 "></div>
             </div>
             @forelse ($categories as $category)
                 

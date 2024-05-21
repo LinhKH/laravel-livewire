@@ -45,6 +45,7 @@ class ProductController extends Controller
         $product->selling_price = $inputs['selling_price'];
         $product->quantity = $inputs['quantity'];
         $product->trending = $request->has('trending') ? 1 : 0;
+        $product->featured = $request->has('featured') ? 1 : 0;
         $product->status = $request->has('status') ? 1 : 0;
         $product->meta_title = $inputs['meta_title'];
         $product->meta_keyword = $inputs['meta_keyword'];
@@ -106,6 +107,7 @@ class ProductController extends Controller
         $product->selling_price = $inputs['selling_price'];
         $product->quantity = $inputs['quantity'];
         $product->trending = $request->has('trending') ? 1 : 0;
+        $product->featured = $request->has('featured') ? 1 : 0;
         $product->status = $request->has('status') ? 1 : 0;
         $product->meta_title = $inputs['meta_title'];
         $product->meta_keyword = $inputs['meta_keyword'];

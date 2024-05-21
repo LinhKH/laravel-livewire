@@ -40,6 +40,9 @@
                                                 Trending
                                             </th>
                                             <th>
+                                                Featured
+                                            </th>
+                                            <th>
                                                 Action
                                             </th>
                                         </tr>
@@ -64,6 +67,9 @@
                                             </td>
                                             <td>
                                                 {{ $product->trending == '1' ? 'Trending' : 'Not Trending' }}
+                                            </td>
+                                            <td>
+                                                {{ $product->featured == '1' ? 'Featured' : 'Not Featured' }}
                                             </td>
                                            
                                             <td>

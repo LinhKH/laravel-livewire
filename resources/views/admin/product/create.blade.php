@@ -168,6 +168,14 @@
                                     <div class="col-md-4">
                                         <div class="form-check form-check-flat form-check-primary">
                                             <label class="form-check-label">
+                                                <input type="checkbox" name="featured" class="form-check-input">
+                                                Featured
+                                                <i class="input-helper"></i></label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-check form-check-flat form-check-primary">
+                                            <label class="form-check-label">
                                                 <input type="checkbox" name="status" class="form-check-input">
                                                 Status
                                                 <i class="input-helper"></i></label>
