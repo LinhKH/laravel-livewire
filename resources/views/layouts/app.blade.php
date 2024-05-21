@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     
-    
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -15,8 +14,6 @@
     <meta name="author" content="Linh Kieu">
     
 
-
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="dns-prefetch" href="//fonts.bunny.net">
@@ -24,6 +21,8 @@
 
     <link rel="stylesheet" href="{{ asset('assets/css/owl.carousel.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/owl.theme.default.min.css') }}">
+    <link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="{{ asset('assets/css/jquery.exzoom.css') }}">
 
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
@@ -31,7 +30,7 @@
     <link href="{{ asset('assets/css/custome.css') }}" rel="stylesheet">
 
     <!-- Scripts -->
-    @vite(['resources/sass/app.scss', 'resources/js/app.js', 'public/assets/js/jquery-3.7.1.min.js'])
+    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 
     @livewireStyles
 </head>
@@ -101,11 +100,13 @@
 
     </div>
 
+    <script src="{{ asset('assets/js/jquery-1.12.4.min.js') }}"></script>
     <!-- plugins:js -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
     <script src="{{ asset('assets/js/owl.carousel.min.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery.exzoom.js') }}"></script>
 
     @if (session('message'))
         <script>
@@ -122,7 +123,7 @@
     <script>
         @yield('script')
     </script>
-    @stack('scripts')
     @livewireScripts
+    @stack('scripts')
 </body>
 </html>
