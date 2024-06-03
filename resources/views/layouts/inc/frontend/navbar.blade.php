@@ -38,7 +38,7 @@
                                 <li><a class="dropdown-item" href="#"><i class="fa fa-user"></i> Profile</a></li>
                                 <li><a class="dropdown-item" href="{{ url('/my-orders') }}"><i class="fa fa-list"></i> My Orders</a></li>
                                 <li><a class="dropdown-item" href="{{ url('/wishlists') }}"><i class="fa fa-heart"></i> My Wishlist</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="fa fa-shopping-cart"></i> My Cart</a>
+                                <li><a class="dropdown-item" href="{{ url('/carts') }}"><i class="fa fa-shopping-cart"></i> My Cart</a>
                                 </li>
                                 <li>
                                     <a class="dropdown-item" href=""

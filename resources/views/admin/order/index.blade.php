@@ -57,8 +57,8 @@
                                 <td>{{ $order->tracking_no }}</td>
                                 <td>{{ $order->full_name }}</td>
                                 <td>{{ $order->payment_mode }}</td>
-                                <td>{{ $order->created_at }}</td>
-                                <td>{{ App\Enums\OrderStatus::from($order->status_message)->status() }}</td>
+                                <td>{{ $order->created_at->format('Y-m-d H:i A') }}</td>
+                                <td><i class="fa {{ App\Enums\OrderStatus::from($order->status_message)->icon() }}"></i> {{ App\Enums\OrderStatus::from($order->status_message)->status() }}</td>
                                 <td>
                                     <a href="{{ url('/admin/order/'. $order->id ) }}"
                                         class="btn btn-primary btn-sm">View</a>

@@ -96,13 +96,24 @@
                             <span wire:loading wire:target='addToCard'><i
                                     class="fa fa-shopping-cart"></i>Adding...</span>
                         </button>
+                        @if (!$this->productExists)
                         <a href="javascript:void(0)" wire:click='addToWishlist({{ $product->id }})' class="btn btn1">
                             <span wire:loading.remove wire:target='addToWishlist'>
-                                <i class="fa fa-heart"></i> Add To Wishlist
+                                <i class="fa-regular fa-heart"></i> Add To Wishlist
                             </span>
 
                             <span wire:loading wire:target='addToWishlist'>Loading...</span>
                         </a>
+                        @else
+                        <a href="javascript:void(0)" wire:click='removeWishlist({{ $product->id }})' class="btn btn1">
+                            <span wire:loading.remove wire:target='removeWishlist'>
+                                <i class="fa-solid fa-heart"></i></i> Remove Wishlist
+                            </span>
+
+                            <span wire:loading wire:target='removeWishlist'>Loading...</span>
+                        </a>
+
+                        @endif
                     </div>
                     <div class="mt-3">
                         <h5 class="mb-0">Small Description</h5>

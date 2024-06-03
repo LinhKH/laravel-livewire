@@ -5,6 +5,8 @@ namespace App\Livewire\Frontend\Product;
 use App\Models\Cart;
 use App\Models\WishList;
 use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\Computed;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class View extends Component
@@ -20,6 +22,15 @@ class View extends Component
     {
         $this->product = $product;
         $this->category = $category;
+    }
+    #[Computed()]
+    public function productExists()
+    {
+        if (auth()->check()) {
+            return WishList::where('product_id', $this->product->id)->where('user_id', auth()->user()->id)->exists();
+        } else {
+            return false;
+        }
     }
 
     function colorSelected($product_color_id)
@@ -176,6 +187,16 @@ class View extends Component
         }
 
         
+    }
+
+    function removeWishlist($product_id)
+    {
+        WishList::where('product_id', $product_id)->where('user_id', auth()->user()->id)->delete();
+        $this->dispatch('wishlist-deleted');
+        $this->dispatch('alertyfy', [
+            'text' => 'Remove Wishlist Successfully',
+            'type' => 'success',
+        ]);
     }
     public function render()
     {

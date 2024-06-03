@@ -14,9 +14,6 @@
                                 <h4>Price</h4>
                             </div>
                             <div class="col-md-2">
-                                <h4>Quantity</h4>
-                            </div>
-                            <div class="col-md-2">
                                 <h4>Remove</h4>
                             </div>
                         </div>
@@ -35,15 +32,7 @@
                             <div class="col-md-2 my-auto">
                                 <label class="price">$569 </label>
                             </div>
-                            <div class="col-md-2 col-7 my-auto">
-                                <div class="quantity">
-                                    <div class="input-group">
-                                        <span class="btn btn1"><i class="fa fa-minus"></i></span>
-                                        <input type="text" value="1" class="input-quantity" />
-                                        <span class="btn btn1"><i class="fa fa-plus"></i></span>
-                                    </div>
-                                </div>
-                            </div>
+
                             <div class="col-md-2 col-5 my-auto">
                                 <div class="remove">
                                     <a href="" class="btn btn-danger btn-sm">
