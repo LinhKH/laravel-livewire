@@ -31,7 +31,7 @@ class FrontendController extends Controller
         return view('frontend.category.index', compact('categories'));
     }
 
-    function prooducts($category_slug)
+    function products($category_slug)
     {
 
         $category = Category::where('slug', $category_slug)->first();

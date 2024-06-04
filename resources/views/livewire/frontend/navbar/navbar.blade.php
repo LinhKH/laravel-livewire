@@ -29,26 +29,31 @@
                             </a>
                         </li>
                         @if (auth()->check())
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
+                        <li class="nav-item dropdown" wire:click='toogleMenu'>
+                            <a class="nav-link dropdown-toggle {{ $showDropdown ? 'show' : '' }}" href="javascript:void(0)"  role="button"
+                                aria-expanded="{{ $showDropdown }}">
                                 <i class="fa fa-user"></i> {{ Auth::user()->name }}
                             </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#"><i class="fa fa-user"></i> Profile</a></li>
-                                <li><a wire:navigate class="dropdown-item" href="{{ url('/my-orders') }}"><i class="fa fa-list"></i> My Orders</a></li>
-                                <li><a wire:navigate class="dropdown-item" href="{{ url('/wishlists') }}"><i class="fa fa-heart"></i> My Wishlist</a></li>
-                                <li><a wire:navigate class="dropdown-item" href="{{ url('/carts') }}"><i class="fa fa-shopping-cart"></i> My Cart</a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href=""
-                                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i
-                                            class="fa fa-sign-out"></i> Logout</a>
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </li>
-                            </ul>
+                            @if ($showDropdown)
+                                <ul class="dropdown-menu show" wire:transition.origin.top.delay.50ms>
+                                    <li><a class="dropdown-item" href="#"><i class="fa fa-user"></i> Profile</a></li>
+                                    <li><a wire:navigate class="dropdown-item" href="{{ url('/my-orders') }}"><i
+                                                class="fa fa-list"></i> My Orders</a></li>
+                                    <li><a wire:navigate class="dropdown-item" href="{{ url('/wishlists') }}"><i
+                                                class="fa fa-heart"></i> My Wishlist</a></li>
+                                    <li><a wire:navigate class="dropdown-item" href="{{ url('/carts') }}"><i
+                                                class="fa fa-shopping-cart"></i> My Cart</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href=""
+                                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i
+                                                class="fa fa-sign-out"></i> Logout</a>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                            @csrf
+                                        </form>
+                                    </li>
+                                </ul>
+                            @endif
                         </li>
 
                         @else
@@ -113,4 +118,5 @@
             </div>
         </div>
     </nav>
+
 </div>

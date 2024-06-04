@@ -106,7 +106,7 @@
                                 <div class="product-card-body">
                                     <p class="product-brand">{{ $product->brand?->name }}</p>
                                     <h5 class="product-name">
-                                        <a
+                                        <a wire:navigate
                                             href="{{ url('collections/'. $product->category->slug .'/'.$product->slug) }}">
                                             {{ $product->name }}
                                         </a>

@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('title', 'WishList Title')
 @section('content')
 
 <div>

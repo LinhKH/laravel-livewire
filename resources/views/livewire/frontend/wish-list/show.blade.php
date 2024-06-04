@@ -22,7 +22,7 @@
                     <div class="cart-item">
                         <div class="row">
                             <div class="col-md-6 my-auto">
-                                <a
+                                <a wire:navigate
                                     href="{{ url('/collections/'.$wishlist->product->category->slug. '/'. $wishlist->product->slug) }}">
                                     <label class="product-name">
                                         @if ($wishlist->product?->images->count() > 0)

@@ -11,7 +11,7 @@
             @forelse ($categories as $category)
             <div class="col-6 col-md-3 d-flex justify-content-center mt-5">
                 <div class="card p-3 bg-white">
-                    <a href="{{ url('collections/' .$category->slug) }}">
+                    <a wire:navigate href="{{ url('collections/' .$category->slug) }}">
                         <div class="about-product text-center mt-2">
                             <img src="{{ asset($category->image) }}" width="200" alt="{{ $category->name }}">
                             <div>
