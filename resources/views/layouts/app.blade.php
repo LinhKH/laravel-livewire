@@ -14,6 +14,9 @@
     <meta name="author" content="Linh Kieu">
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/bs-brain@2.0.4/utilities/bsb-overlay/bsb-overlay.css">
+    <link rel="stylesheet" href="https://unpkg.com/bs-brain@2.0.4/utilities/bsb-btn-size/bsb-btn-size.css">
+    <link rel="stylesheet" href="https://unpkg.com/bs-brain@2.0.4/components/heroes/hero-6/assets/css/hero-6.css">
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
@@ -49,7 +52,7 @@
 
     <script src="{{ asset('assets/js/jquery-1.12.4.min.js') }}"></script>
     <!-- plugins:js -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+    <script data-navigate-once src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
     <script src="{{ asset('assets/js/owl.carousel.min.js') }}"></script>
@@ -62,9 +65,14 @@
         </script>
     @endif
     <script>
-        window.addEventListener('alertyfy', event => {
-            alertify.set('notifier','position', 'top-right');
-            alertify.notify(event.detail[0].text + '!', event.detail[0].type);
+        document.addEventListener('livewire:init', () => {
+            Livewire.on('alertyfy', (event) => {
+                console.log(event)
+                var delay = alertify.get('notifier','delay');
+                alertify.set('notifier','delay', 3);
+                alertify.set('notifier','position', 'bot-right');
+                alertify.notify(event[0].text + '!', event[0].type);
+            });
         });
     </script>
     <script>

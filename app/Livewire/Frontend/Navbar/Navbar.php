@@ -8,12 +8,7 @@ use Livewire\Component;
 
 class Navbar extends Component
 {
-    public $showDropdown = false;
 
-    public function toogleMenu()
-    {
-        $this->showDropdown = !$this->showDropdown;
-    }
     public function render()
     {
         return view('livewire.frontend.navbar.navbar');

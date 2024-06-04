@@ -69,7 +69,7 @@
         </div>
         <div class="col-md-9">
             <div class="row">
-                @forelse ($products as $key => $product)
+                @forelse ($this->products as $key => $product)
 
                 <div class="col-md-4">
                     <div class="product-card">
@@ -85,12 +85,17 @@
                             @endif
                         </div>
                         <div class="product-card-body">
-                            <p class="product-brand">{{ $product->brand?->name }}</p>
+                            <p class="product-brand">{{ $category->name }} / {{ $product->brand?->name }}</p>
                             <h5 class="product-name">
                                 <a wire:navigate href="{{ url('collections/'. $product->category->slug .'/'.$product->slug) }}">
                                     {{ $product->name }}
                                 </a>
                             </h5>
+                            @foreach ($product->colors as $color)
+                            <button class="colour-label colour-colorDisplay"
+                                style="background-color: {{ $color->color->code }}">
+                            </button>
+                            @endforeach
                             <div>
                                 <span class="selling-price">${{ $product->selling_price }}</span>
                                 <span class="original-price">${{ $product->original_price }}</span>
@@ -118,6 +123,7 @@
                 @endforelse
 
             </div>
+            {{ $this->products->links(data: ['scrollTo' => false]) }}
 
         </div>
 

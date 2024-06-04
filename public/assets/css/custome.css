@@ -340,3 +340,11 @@
 .height-card {
     height: 40px;
 }
+
+.nav-active {
+    background-color: #2874f0;
+}
+.drop_active {
+    color: var(--bs-dropdown-link-hover-color);
+    background-color: var(--bs-dropdown-link-hover-bg);
+}

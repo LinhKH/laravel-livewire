@@ -15,7 +15,7 @@
     <div class="container">
         <div class="row">
 
-            <livewire:frontend.product.index :products="$products" :category="$category" :wire:key="'item-'.$category->id" />
+            <livewire:frontend.product.index  :category="$category" :wire:key="'item-'.$category->id" />
 
         </div>
     </div>

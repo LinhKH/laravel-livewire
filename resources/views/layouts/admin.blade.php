@@ -22,7 +22,7 @@
     <!-- inject:css -->
     <link rel="stylesheet" href="{{ asset('admin/assets/css/style.css') }}">
     <!-- endinject -->
-    <link rel="shortcut icon" href="{{ asset('admin/assets/images/favicon.ico') }}" />
+    <link rel="shortcut icon" href="{{ asset('admin/assets/img/favicon.ico') }}" />
     @livewireStyles
 </head>
 

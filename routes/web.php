@@ -6,7 +6,7 @@ Route::get('/', [App\Http\Controllers\Frontend\FrontendController::class, 'index
 Route::get('/shop', App\Livewire\Frontend\Product\AllProduct::class);
 Route::get('/collections', [App\Http\Controllers\Frontend\FrontendController::class, 'categories']);
 Route::get('/collections/{category_slug}', [App\Http\Controllers\Frontend\FrontendController::class, 'products']);
-Route::get('/collections/{category_slug}/{product_slug}', [App\Http\Controllers\Frontend\FrontendController::class, 'prooductDetail']);
+Route::get('/collections/{category_slug}/{product_slug}', [App\Http\Controllers\Frontend\FrontendController::class, 'productDetail']);
 Route::get('/new-arrivals', [App\Http\Controllers\Frontend\FrontendController::class, 'newArrivals']);
 Route::get('/featured-products', [App\Http\Controllers\Frontend\FrontendController::class, 'featuredProducts']);
 

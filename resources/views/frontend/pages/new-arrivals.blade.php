@@ -18,7 +18,7 @@
                                 <img src="{{ asset($product->images[0]->image) }}"
                                     alt="{{ $product->name }}">
                             @else
-                                <img src="{{ asset('assets/images/No_Image_Available.jpg') }}"
+                                <img src="{{ asset('assets/img/No_Image_Available.jpg') }}"
                                     alt="{{ $product->name }}">
                             @endif
                         </div>

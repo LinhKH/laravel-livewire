@@ -32,6 +32,26 @@ class AllProduct extends Component
         $this->reset();
     }
 
+    public function updated($property)
+    {
+        if ($property === 'colorCheck.0' || $property === 'categoryCheck.0' || $property === 'brandCheck.0') {
+            $this->resetPage();
+        }
+    }
+
+    // public function updatedColorCheck()
+    // {
+    //     $this->resetPage();
+    // }
+    // public function updatedCategoryCheck()
+    // {
+    //     $this->resetPage();
+    // }
+    // public function updatedBrandCheck()
+    // {
+    //     $this->resetPage();
+    // }
+
     function addToWishlist($product_id)
     {
         if (Auth::check()) {
@@ -83,7 +103,7 @@ class AllProduct extends Component
                     $q3->orderBy('selling_price', 'ASC');
                 });
             })
-            ->where('status', 0)->simplePaginate(6);
+            ->where('status', 0)->paginate(6);
     }
 
     public function render()
@@ -92,7 +112,6 @@ class AllProduct extends Component
         $this->brands = Brand::all();
         $this->colors = Color::all();
 
-        
         return view('livewire.frontend.product.all-product', [
             'categories' => $this->categories,
             'brands' => $this->brands,

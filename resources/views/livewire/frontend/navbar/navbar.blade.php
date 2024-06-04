@@ -29,31 +29,29 @@
                             </a>
                         </li>
                         @if (auth()->check())
-                        <li class="nav-item dropdown" wire:click='toogleMenu'>
-                            <a class="nav-link dropdown-toggle {{ $showDropdown ? 'show' : '' }}" href="javascript:void(0)"  role="button"
-                                aria-expanded="{{ $showDropdown }}">
+                        <li class="nav-item dropdown" wire:ignore.self>
+                            <a class="nav-link dropdown-toggle" href="javascript:void(0)" id="navbarDropdown" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="fa fa-user"></i> {{ Auth::user()->name }}
                             </a>
-                            @if ($showDropdown)
-                                <ul class="dropdown-menu show" wire:transition.origin.top.delay.50ms>
-                                    <li><a class="dropdown-item" href="#"><i class="fa fa-user"></i> Profile</a></li>
-                                    <li><a wire:navigate class="dropdown-item" href="{{ url('/my-orders') }}"><i
-                                                class="fa fa-list"></i> My Orders</a></li>
-                                    <li><a wire:navigate class="dropdown-item" href="{{ url('/wishlists') }}"><i
-                                                class="fa fa-heart"></i> My Wishlist</a></li>
-                                    <li><a wire:navigate class="dropdown-item" href="{{ url('/carts') }}"><i
-                                                class="fa fa-shopping-cart"></i> My Cart</a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href=""
-                                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i
-                                                class="fa fa-sign-out"></i> Logout</a>
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                            @csrf
-                                        </form>
-                                    </li>
-                                </ul>
-                            @endif
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="#"><i class="fa fa-user"></i> Profile</a></li>
+                                <li><a wire:navigate class="dropdown-item {{ request()->is('my-orders') ? 'drop_active' : '' }}" href="{{ url('/my-orders') }}"><i
+                                            class="fa fa-list"></i> My Orders</a></li>
+                                <li><a wire:navigate class="dropdown-item {{ request()->is('wishlists') ? 'drop_active' : '' }}" href="{{ url('/wishlists') }}"><i
+                                            class="fa fa-heart"></i> My Wishlist</a></li>
+                                <li><a wire:navigate class="dropdown-item {{ request()->is('carts') ? 'drop_active' : '' }}" href="{{ url('/carts') }}"><i
+                                            class="fa fa-shopping-cart"></i> My Cart</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href=""
+                                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i
+                                            class="fa fa-sign-out"></i> Logout</a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                </li>
+                            </ul>
                         </li>
 
                         @else
@@ -86,19 +84,19 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
+                    <li class="nav-item {{ request()->is('/') ? 'nav-active' : '' }}">
                         <a wire:navigate class="nav-link" href="{{ url('/') }}">Home</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item {{ request()->is('collections/*') ? 'nav-active' : '' }}">
                         <a wire:navigate class="nav-link" href="{{ url('/collections') }}">All Categories</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item {{ request()->is('shop') ? 'nav-active' : '' }}">
                         <a wire:navigate class="nav-link" href="{{ url('/shop') }}">Shop</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item {{ request()->is('new-arrivals') ? 'nav-active' : '' }}">
                         <a wire:navigate class="nav-link" href="{{ url('/new-arrivals') }}">New Arrivals</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item {{ request()->is('featured-products') ? 'nav-active' : '' }}">
                         <a wire:navigate class="nav-link" href="{{ url('/featured-products') }}">Featured Products</a>
                     </li>
                     <li class="nav-item">

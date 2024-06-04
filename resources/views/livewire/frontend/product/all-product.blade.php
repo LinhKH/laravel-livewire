@@ -104,13 +104,17 @@
                                     @endif
                                 </div>
                                 <div class="product-card-body">
-                                    <p class="product-brand">{{ $product->brand?->name }}</p>
+                                    <p class="product-brand">{{ $product->category->name }} / {{ $product->brand?->name }}</p>
                                     <h5 class="product-name">
                                         <a wire:navigate
                                             href="{{ url('collections/'. $product->category->slug .'/'.$product->slug) }}">
                                             {{ $product->name }}
                                         </a>
                                     </h5>
+                                    @foreach ($product->colors as $color)
+                                    <button class="colour-label colour-colorDisplay" style="background-color: {{ $color->color->code }}">
+                                    </button>
+                                    @endforeach
                                     <div>
                                         <span class="selling-price">${{ $product->selling_price }}</span>
                                         <span class="original-price">${{ $product->original_price }}</span>
@@ -126,7 +130,7 @@
                                             <span wire:loading
                                                 wire:target='addToWishlist({{ $product->id }})'>Adding...</span>
                                         </a>
-                                        <a href="{{ url('collections/'. $product->category->slug .'/'.$product->slug) }}" class="btn btn1"> View </a>
+                                        <a wire:navigate href="{{ url('collections/'. $product->category->slug .'/'.$product->slug) }}" class="btn btn1"> View </a>
                                     </div>
                                 </div>
                             </div>
@@ -134,12 +138,12 @@
 
                         @empty
                         <div class="col-md-12">
-                            <h4 class="p-2">No Products Available for {{ $category->name }}</h4>
+                            <h4 class="p-2">No Products Available</h4>
                         </div>
                         @endforelse
 
                     </div>
-                    {{ $this->products->links() }}
+                    {{ $this->products->links(data: ['scrollTo' => false]) }}
                 </div>
 
             </div>

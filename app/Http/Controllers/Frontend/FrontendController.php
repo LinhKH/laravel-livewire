@@ -35,15 +35,13 @@ class FrontendController extends Controller
     {
 
         $category = Category::where('slug', $category_slug)->first();
-        if ($category) {
-            $products = $category->products()->with('images')->get();
-        } else {
+        if (!$category) {
             return redirect()->back();
         }
-        return view('frontend.product.index', compact('products', 'category'));
+        return view('frontend.product.index', compact('category'));
     }
 
-    function prooductDetail(string $category_slug, string $product_slug)
+    function productDetail(string $category_slug, string $product_slug)
     {
         $category = Category::where('slug', $category_slug)->first();
         if ($category)

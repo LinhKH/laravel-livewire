@@ -71,7 +71,7 @@
                                             @if ($order_item->product->images->count() > 0 )
                                             <img src="{{ asset($order_item->product->images[0]->image) }}" alt="" width="50" height="50">
                                             @else
-                                            <img src="{{ asset('assets/images/no-image.png') }}" alt="" width="50" height="50">
+                                            <img src="{{ asset('assets/img/no-image.png') }}" alt="" width="50" height="50">
                                             @endif
                                         </td>
                                         <td>
