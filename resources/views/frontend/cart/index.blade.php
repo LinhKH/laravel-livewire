@@ -2,7 +2,7 @@
 @section('title', 'Cart Title')
 
 @section('content')
-<div>
-    <livewire:frontend.cart.cart-show>
-</div>
+    <div>
+        <livewire:frontend.cart.cart-show>
+    </div>
 @endsection

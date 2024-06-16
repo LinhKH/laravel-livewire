@@ -100,8 +100,8 @@
                                 <span class="selling-price">${{ $product->selling_price }}</span>
                                 <span class="original-price">${{ $product->original_price }}</span>
                             </div>
-                            <div class="mt-2">
-                                <a href="" class="btn btn1">Add To Cart</a>
+                            <div class="mt-2 text-center">
+                                {{-- <a href="" class="btn btn1">Add To Cart</a> --}}
                                 <a href="javascript:void(0)" wire:click='addToWishlist({{ $product->id }})'
                                     class="btn btn1">
                                     <span wire:loading.remove wire:target='addToWishlist({{ $product->id }})'>
@@ -110,7 +110,11 @@
 
                                     <span wire:loading wire:target='addToWishlist({{ $product->id }})'>Adding...</span>
                                 </a>
-                                <a href="" class="btn btn1"> View </a>
+                                {{-- <a href="" class="btn btn1"> View </a> --}}
+                                <a class="btn btn1" wire:navigate href="{{ url('collections/'. $product->category->slug .'/'.$product->slug) }}">
+                                    {{-- View --}}
+                                    <i class="fa fa-eye"></i>
+                                </a>
                             </div>
                         </div>
                     </div>

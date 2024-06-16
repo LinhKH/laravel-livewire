@@ -38,28 +38,24 @@ class CartShow extends Component
     function incrementCartQty(int $cart_id)
     {
         $cart = Cart::where('id', $cart_id)->first();
-        
+
         if ($cart) {
-            if($cart->product_color && $cart->product_color->where('id',$cart->product_color_id)->exists()) {
-                $productColor = $cart->product_color->where('id',$cart->product_color_id)->first();
+            if ($cart->product_color && $cart->product_color->where('id', $cart->product_color_id)->exists()) {
+                $productColor = $cart->product_color->where('id', $cart->product_color_id)->first();
                 if ($productColor->quantity > $cart->quantity) {
                     $cart->increment('quantity');
-                   
                 } else {
                     $this->dispatch('alertyfy', [
-                        'text' => 'Only '. $productColor->quantity. ' Quantity Available',
+                        'text' => 'Only ' . $productColor->quantity . ' Quantity Available',
                         'type' => 'error',
                     ]);
                 }
-
             } else {
-                if($cart->product->quantity > $cart->quantity)
-                {
+                if ($cart->product->quantity > $cart->quantity) {
                     $cart->increment('quantity');
-                    
                 } else {
                     $this->dispatch('alertyfy', [
-                        'text' => 'Only '. $cart->product->quantity. ' Quantity Available',
+                        'text' => 'Only ' . $cart->product->quantity . ' Quantity Available',
                         'type' => 'error',
                     ]);
                 }

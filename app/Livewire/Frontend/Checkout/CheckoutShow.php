@@ -91,11 +91,12 @@ class CheckoutShow extends Component
                 $cartItem->product_color->where('id', $cartItem->product_color_id)->update([
                     'quantity' => $cartItem->product_color->quantity - (int)$cartItem->quantity,
                 ]);
-            } else {
-                $cartItem->product->where('id', $cartItem->product_id)->update([
-                    'quantity' => $cartItem->product->quantity - (int)$cartItem->quantity,
-                ]);
-            }
+            } 
+            // else {
+            // }
+            $cartItem->product->where('id', $cartItem->product_id)->update([
+                'quantity' => $cartItem->product->quantity - (int)$cartItem->quantity,
+            ]);
         }
 
         return $order;

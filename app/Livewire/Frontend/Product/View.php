@@ -59,7 +59,7 @@ class View extends Component
         {
             if($this->product->where(['id' => $product_id])->where('status','0')->exists())
             {
-                if($this->product->colors->count() > 1){
+                if($this->product->colors->count() > 0){
                     if($this->productColorSelectedQty != null) {
                         //color selected
 
